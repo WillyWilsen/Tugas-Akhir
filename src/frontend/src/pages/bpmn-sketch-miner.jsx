@@ -11,6 +11,7 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export const BPMN_Sketch_Miner = () => {
   const [file, setFile] = useState(null);
@@ -50,6 +51,7 @@ export const BPMN_Sketch_Miner = () => {
       <Heading as="h1" size="xl" textAlign="center" my="4" mx="4">
         BPMN Generation
       </Heading>
+      <Box p="4">Go to <Link to="/bpmn-js">BPMN JS</Link></Box>
       <Box borderWidth="2px" borderRadius="md" p="4" mx="4" bg="gray.50">
         <FormControl mt="2">
           <FormLabel>File</FormLabel>
