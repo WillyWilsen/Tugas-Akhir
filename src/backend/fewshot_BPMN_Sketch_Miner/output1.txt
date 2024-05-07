@@ -1,0 +1,19 @@
+InnovateTech:
+(start Start)
+Menemukan Pencurian Informasi
+CEO Alex Miller: 
+Merekrut Laura Davis dan Michael Turner
+Mendirikan TechInnovate
+TechInnovate:
+Meniru Produk dan Strategi InnovateTech
+InnovateTech:
+Merasa Dirugikan dan Mengajukan Gugatan
+Tim Hukum InnovateTech:
+(Terlibat)
+Pengadilan:
+Memproses Hukum
+TechInnovate Bersalah?
+Ya
+TechInnovate: 
+Dihukum atas Pencurian Kekayaan Intelektual
+(finish End)

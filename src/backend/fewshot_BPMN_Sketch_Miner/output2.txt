@@ -1,0 +1,20 @@
+Maju Bangun:
+(start Start)
+Praktek Korupsi
+Budi Santoso:
+Membujuk Andi Wijaya
+Andi Wijaya:
+Menerima Suap
+Linda Setiawan:
+Menjadi Perantara
+Distribusi Uang Suap dan Transfer ke Perusahaan Palsu
+Maju Bangun:
+Pelanggaran Standar Bahan Konstruksi
+Dian Prasetyo:
+Mengetahui dan Diam oleh Tekanan Internal
+Rini Susanti:
+(Sebagai Whistleblower)
+Laporan ke Komisi Pemberantasan Korupsi (KPK)
+Pengadilan:
+Memulai Proses Hukum
+(finish End)

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_KPU_Bawaslu" targetNamespace="http://bpmn.io/schema/bpmn/kpu_bawaslu" exporter="bpmn-js (https://bpmn.io)" exporterVersion="0.1.0">
+	<bpmn:collaboration id="Collaboration_KPU_Bawaslu">
+		<bpmn:participant id="Participant_KPU" name="Komisi Pemilihan Umum (KPU)" processRef="Process_KPU"></bpmn:participant>
+		<bpmn:participant id="Participant_Bawaslu" name="Badan Pengawas Pemilihan Umum (Bawaslu)" processRef="Process_Bawaslu"></bpmn:participant>
+		<bpmn:messageFlow id="MessageFlow_KPU_Bawaslu_Communication" sourceRef="Activity_Report_KPU" targetRef="Activity_Receive_Report_Bawaslu"></bpmn:messageFlow>
+	</bpmn:collaboration>
+	<bpmn:process id="Process_KPU">
+		<bpmn:laneSet id="LaneSet_KPU"></bpmn:laneSet>
+		<bpmn:startEvent id="StartEvent_KPU" name="Election Period Starts">
+			<bpmn:outgoing>SequenceFlow_Start_To_KPU_Activity</bpmn:outgoing>
+		</bpmn:startEvent>
+		<bpmn:task id="Activity_Planning_KPU" name="Plan and Budget Activities">
+			<bpmn:incoming>SequenceFlow_Start_To_KPU_Activity</bpmn:incoming>
+			<bpmn:outgoing>SequenceFlow_Planning_To_Reporting</bpmn:outgoing>
+		</bpmn:task>
+		<bpmn:task id="Activity_Report_KPU" name="Report Election Results">
+			<bpmn:incoming>SequenceFlow_Planning_To_Reporting</bpmn:incoming>
+		</bpmn:task>
+		<bpmn:sequenceFlow id="SequenceFlow_Start_To_KPU_Activity" sourceRef="StartEvent_KPU" targetRef="Activity_Planning_KPU"></bpmn:sequenceFlow>
+		<bpmn:sequenceFlow id="SequenceFlow_Planning_To_Reporting" sourceRef="Activity_Planning_KPU" targetRef="Activity_Report_KPU"></bpmn:sequenceFlow>
+		<bpmn:sequenceFlow id="SequenceFlow_Report_To_End_KPU" sourceRef="Activity_Report_KPU" targetRef="EndEvent_KPU"></bpmn:sequenceFlow>
+		<bpmn:endEvent id="EndEvent_KPU" name="End of Election Process">
+			<bpmn:incoming>SequenceFlow_Report_To_End_KPU</bpmn:incoming>
+		</bpmn:endEvent>
+	</bpmn:process>
+	<bpmn:process id="Process_Bawaslu">
+		<bpmn:laneSet id="LaneSet_Bawaslu"></bpmn:laneSet>
+		<bpmn:startEvent id="StartEvent_Bawaslu" name="Monitoring Commences">
+			<bpmn:outgoing>SequenceFlow_Start_To_Monitoring</bpmn:outgoing>
+		</bpmn:startEvent>
+		<bpmn:task id="Activity_Monitoring_Bawaslu" name="Monitor and Oversee Election">
+			<bpmn:incoming>SequenceFlow_Start_To_Monitoring</bpmn:incoming>
+			<bpmn:outgoing>SequenceFlow_Monitoring_To_Review</bpmn:outgoing>
+		</bpmn:task>
+		<bpmn:task id="Activity_Receive_Report_Bawaslu" name="Receive Election Reports">
+			<bpmn:incoming>SequenceFlow_Monitoring_To_Review</bpmn:incoming>
+		</bpmn:task>
+		<bpmn:sequenceFlow id="SequenceFlow_Start_To_Monitoring" sourceRef="StartEvent_Bawaslu" targetRef="Activity_Monitoring_Bawaslu"></bpmn:sequenceFlow>
+		<bpmn:sequenceFlow id="SequenceFlow_Monitoring_To_Review" sourceRef="Activity_Monitoring_Bawaslu" targetRef="Activity_Receive_Report_Bawaslu"></bpmn:sequenceFlow>
+		<bpmn:sequenceFlow id="SequenceFlow_Review_To_End_Bawaslu" sourceRef="Activity_Receive_Report_Bawaslu" targetRef="EndEvent_Bawaslu"></bpmn:sequenceFlow>
+		<bpmn:endEvent id="EndEvent_Bawaslu" name="End of Monitoring Process">
+			<bpmn:incoming>SequenceFlow_Review_To_End_Bawaslu</bpmn:incoming>
+		</bpmn:endEvent>
+	</bpmn:process>
+</bpmn:definitions>

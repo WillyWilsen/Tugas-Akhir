@@ -1,0 +1,184 @@
+{
+  "bpmn:definitions": {
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "@xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL",
+    "@xmlns:bpmndi": "http://www.omg.org/spec/BPMN/20100524/DI",
+    "@xmlns:dc": "http://www.omg.org/spec/DD/20100524/DC",
+    "@xmlns:di": "http://www.omg.org/spec/DD/20100524/DI",
+    "@id": "Definitions_1xh4b31",
+    "@targetNamespace": "http://bpmn.io/schema/bpmn",
+    "@exporter": "bpmn-js (https://demo.bpmn.io)",
+    "@exporterVersion": "16.4.0",
+    "bpmn:collaboration": {
+      "@id": "Collaboration_1",
+      "bpmn:participant": [
+        {
+          "@id": "Participant_Maju_Bangun",
+          "@name": "Maju Bangun",
+          "@processRef": "Process_Maju_Bangun"
+        },
+        {
+          "@id": "Participant_Budi_Santoso",
+          "@name": "Budi Santoso",
+          "@processRef": "Process_Budi_Santoso"
+        },
+        {
+          "@id": "Participant_Linda_Setiawan",
+          "@name": "Linda Setiawan",
+          "@processRef": "Process_Linda_Setiawan"
+        },
+        {
+          "@id": "Participant_Andi_Wijaya",
+          "@name": "Andi Wijaya",
+          "@processRef": "Process_Andi_Wijaya"
+        },
+        {
+          "@id": "Participant_Dian_Prasetyo",
+          "@name": "Dian Prasetyo",
+          "@processRef": "Process_Dian_Prasetyo"
+        },
+        {
+          "@id": "Participant_Rini_Susanti",
+          "@name": "Rini Susanti",
+          "@processRef": "Process_Rini_Susanti"
+        }
+      ],
+      "bpmn:messageFlow": [
+        {
+          "@id": "Flow_Activity_Maju_Bangun_1-Activity_Budi_Santoso_1",
+          "@sourceRef": "Activity_Maju_Bangun_1",
+          "@targetRef": "Activity_Budi_Santoso_1"
+        },
+        {
+          "@id": "Flow_Activity_Linda_Setiawan_2-Activity_Maju_Bangun_2",
+          "@sourceRef": "Activity_Linda_Setiawan_2",
+          "@targetRef": "Activity_Maju_Bangun_2"
+        },
+        {
+          "@id": "Flow_Activity_Andi_Wijaya_1-Activity_Linda_Setiawan_1",
+          "@sourceRef": "Activity_Andi_Wijaya_1",
+          "@targetRef": "Activity_Linda_Setiawan_1"
+        },
+        {
+          "@id": "Flow_Activity_Budi_Santoso_1-Activity_Andi_Wijaya_1",
+          "@sourceRef": "Activity_Budi_Santoso_1",
+          "@targetRef": "Activity_Andi_Wijaya_1"
+        },
+        {
+          "@id": "Flow_Activity_Maju_Bangun_2-Activity_Dian_Prasetyo_1",
+          "@sourceRef": "Activity_Maju_Bangun_2",
+          "@targetRef": "Activity_Dian_Prasetyo_1"
+        },
+        {
+          "@id": "Flow_Event_As_a_Whistleblower-Activity_Dian_Prasetyo_1",
+          "@sourceRef": "Event_As_a_Whistleblower",
+          "@targetRef": "Activity_Dian_Prasetyo_1"
+        }
+      ]
+    },
+    "bpmn:process": [
+      {
+        "@id": "Process_Maju_Bangun",
+        "@isExecutable": "false",
+        "bpmn:task": [
+          {
+            "@id": "Activity_Maju_Bangun_1",
+            "@name": "Corrupt Practices",
+            "bpmn:incoming": "Flow_Event_Start-Activity_Maju_Bangun_1"
+          },
+          {
+            "@id": "Activity_Maju_Bangun_2",
+            "@name": "Violating Construction Material Standards"
+          }
+        ],
+        "bpmn:startEvent": {
+          "@id": "Event_Start",
+          "@name": "Start",
+          "bpmn:outgoing": "Flow_Event_Start-Activity_Maju_Bangun_1"
+        },
+        "bpmn:sequenceFlow": {
+          "@id": "Flow_Event_Start-Activity_Maju_Bangun_1",
+          "@sourceRef": "Event_Start",
+          "@targetRef": "Activity_Maju_Bangun_1"
+        }
+      },
+      {
+        "@id": "Process_Budi_Santoso",
+        "@isExecutable": "false",
+        "bpmn:task": {
+          "@id": "Activity_Budi_Santoso_1",
+          "@name": "Persuading Andi Wijaya"
+        }
+      },
+      {
+        "@id": "Process_Linda_Setiawan",
+        "@isExecutable": "false",
+        "bpmn:task": [
+          {
+            "@id": "Activity_Linda_Setiawan_1",
+            "@name": "Become an Intermediary",
+            "bpmn:outgoing": "Flow_Activity_Linda_Setiawan_1-Activity_Linda_Setiawan_2"
+          },
+          {
+            "@id": "Activity_Linda_Setiawan_2",
+            "@name": "Distribution of Bribes and Transfers to Fake Companies",
+            "bpmn:incoming": "Flow_Activity_Linda_Setiawan_1-Activity_Linda_Setiawan_2"
+          }
+        ],
+        "bpmn:sequenceFlow": {
+          "@id": "Flow_Activity_Linda_Setiawan_1-Activity_Linda_Setiawan_2",
+          "@sourceRef": "Activity_Linda_Setiawan_1",
+          "@targetRef": "Activity_Linda_Setiawan_2"
+        }
+      },
+      {
+        "@id": "Process_Andi_Wijaya",
+        "@isExecutable": "false",
+        "bpmn:task": {
+          "@id": "Activity_Andi_Wijaya_1",
+          "@name": "Accepting Bribes"
+        }
+      },
+      {
+        "@id": "Process_Dian_Prasetyo",
+        "@isExecutable": "false",
+        "bpmn:task": {
+          "@id": "Activity_Dian_Prasetyo_1",
+          "@name": "Knowing and Being Silenced by Internal Pressure"
+        }
+      },
+      {
+        "@id": "Process_Rini_Susanti",
+        "@isExecutable": "false",
+        "bpmn:intermediateThrowEvent": {
+          "@id": "Event_As_a_Whistleblower",
+          "@name": "As a Whistleblower",
+          "bpmn:outgoing": "Flow_Event_As_a_Whistleblower-Activity_Rini_Susanti_1"
+        },
+        "bpmn:task": {
+          "@id": "Activity_Rini_Susanti_1",
+          "@name": "Report to the Corruption Eradication Commission",
+          "bpmn:incoming": "Flow_Event_As_a_Whistleblower-Activity_Rini_Susanti_1",
+          "bpmn:outgoing": "Flow_Activity_Rini_Susanti_1-Event_End"
+        },
+        "bpmn:endEvent": {
+          "@id": "Event_End",
+          "@name": "End",
+          "bpmn:incoming": "Flow_Activity_Rini_Susanti_1-Event_End"
+        },
+        "bpmn:sequenceFlow": [
+          {
+            "@id": "Flow_Event_As_a_Whistleblower-Activity_Rini_Susanti_1",
+            "@sourceRef": "Event_As_a_Whistleblower",
+            "@targetRef": "Activity_Rini_Susanti_1"
+          },
+          {
+            "@id": "Flow_Activity_Rini_Susanti_1-Event_End",
+            "@sourceRef": "Activity_Rini_Susanti_1",
+            "@targetRef": "Event_End"
+          }
+        ]
+      }
+    ]
+  }
+}

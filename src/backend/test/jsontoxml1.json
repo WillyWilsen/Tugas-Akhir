@@ -1,0 +1,340 @@
+{
+  "bpmn:definitions": {
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "@xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL",
+    "@xmlns:bpmndi": "http://www.omg.org/spec/BPMN/20100524/DI",
+    "@xmlns:dc": "http://www.omg.org/spec/DD/20100524/DC",
+    "@xmlns:di": "http://www.omg.org/spec/DD/20100524/DI",
+    "@id": "definitions_1",
+    "@targetNamespace": "http://www.bpmn-sketch-miner.ai",
+    "@exporter": "bpmn-js (https://demo.bpmn.io)",
+    "@exporterVersion": "16.4.0",
+    "bpmn:process": {
+      "@id": "Process_1",
+      "bpmn:startEvent": {
+        "@id": "StartEvent_1",
+        "@name": "Start",
+        "bpmn:outgoing": "Flow_1"
+      },
+      "bpmn:task": [
+        {
+          "@id": "Task_1",
+          "@name": "Menaati peraturan dan melaksanakan program organisasi profesi",
+          "bpmn:incoming": "Flow_1",
+          "bpmn:outgoing": "Flow_2"
+        },
+        {
+          "@id": "Task_2",
+          "@name": "Mengembangkan dan memajukan organisasi profesi",
+          "bpmn:incoming": "Flow_2",
+          "bpmn:outgoing": "Flow_3"
+        },
+        {
+          "@id": "Task_3",
+          "@name": "Mengembangkan organisasi profesi menjadi pusat peningkatan profesionalitas guru dan pusat informasi tentang pengembangan pendidikan",
+          "bpmn:incoming": "Flow_3",
+          "bpmn:outgoing": "Flow_4"
+        },
+        {
+          "@id": "Task_4",
+          "@name": "Menjunjung tinggi kehormatan dan martabat organisasi profesi",
+          "bpmn:incoming": "Flow_4",
+          "bpmn:outgoing": "Flow_5"
+        },
+        {
+          "@id": "Task_5",
+          "@name": "Tindakan dan pendapat yang tidak merendahkan martabat profesi",
+          "bpmn:incoming": "Flow_5",
+          "bpmn:outgoing": "Flow_6"
+        },
+        {
+          "@id": "Task_6",
+          "@name": "Berperan serta menjaga persatuan dan kesatuan dalam kehidupan berbangsa",
+          "bpmn:incoming": "Flow_6",
+          "bpmn:outgoing": "Flow_7"
+        },
+        {
+          "@id": "Task_7",
+          "@name": "Berperan serta dalam melaksanakan program pembangunan pendidikan",
+          "bpmn:incoming": "Flow_7",
+          "bpmn:outgoing": "Flow_8"
+        },
+        {
+          "@id": "Task_8",
+          "@name": "Melaksanakan ketentuan yang ditetapkan pemerintah",
+          "bpmn:incoming": "Flow_8"
+        }
+      ],
+      "bpmn:endEvent": {
+        "@id": "EndEvent_1",
+        "@name": "End",
+        "bpmn:incoming": "Flow_8"
+      },
+      "bpmn:sequenceFlow": [
+        {
+          "@id": "Flow_1",
+          "@sourceRef": "StartEvent_1",
+          "@targetRef": "Task_1"
+        },
+        {
+          "@id": "Flow_2",
+          "@sourceRef": "Task_1",
+          "@targetRef": "Task_2"
+        },
+        {
+          "@id": "Flow_3",
+          "@sourceRef": "Task_2",
+          "@targetRef": "Task_3"
+        },
+        {
+          "@id": "Flow_4",
+          "@sourceRef": "Task_3",
+          "@targetRef": "Task_4"
+        },
+        {
+          "@id": "Flow_5",
+          "@sourceRef": "Task_4",
+          "@targetRef": "Task_5"
+        },
+        {
+          "@id": "Flow_6",
+          "@sourceRef": "Task_5",
+          "@targetRef": "Task_6"
+        },
+        {
+          "@id": "Flow_7",
+          "@sourceRef": "Task_6",
+          "@targetRef": "Task_7"
+        },
+        {
+          "@id": "Flow_8",
+          "@sourceRef": "Task_7",
+          "@targetRef": "Task_8"
+        }
+      ]
+    },
+    "bpmndi:BPMNDiagram": {
+      "@id": "Diagram_1",
+      "bpmndi:BPMNPlane": {
+        "@id": "Plane_1",
+        "@bpmnElement": "Process_1",
+        "bpmndi:BPMNShape": [
+          {
+            "@id": "Shape_StartEvent_1",
+            "@bpmnElement": "StartEvent_1",
+            "dc:Bounds": {
+              "@x": "50",
+              "@y": "100",
+              "@width": "24",
+              "@height": "24"
+            }
+          },
+          {
+            "@id": "Shape_Task_1",
+            "@bpmnElement": "Task_1",
+            "dc:Bounds": {
+              "@x": "100",
+              "@y": "80",
+              "@width": "100",
+              "@height": "80"
+            }
+          },
+          {
+            "@id": "Shape_Task_2",
+            "@bpmnElement": "Task_2",
+            "dc:Bounds": {
+              "@x": "240",
+              "@y": "80",
+              "@width": "100",
+              "@height": "80"
+            }
+          },
+          {
+            "@id": "Shape_Task_3",
+            "@bpmnElement": "Task_3",
+            "dc:Bounds": {
+              "@x": "380",
+              "@y": "80",
+              "@width": "100",
+              "@height": "80"
+            }
+          },
+          {
+            "@id": "Shape_Task_4",
+            "@bpmnElement": "Task_4",
+            "dc:Bounds": {
+              "@x": "520",
+              "@y": "80",
+              "@width": "100",
+              "@height": "80"
+            }
+          },
+          {
+            "@id": "Shape_Task_5",
+            "@bpmnElement": "Task_5",
+            "dc:Bounds": {
+              "@x": "660",
+              "@y": "80",
+              "@width": "100",
+              "@height": "80"
+            }
+          },
+          {
+            "@id": "Shape_Task_6",
+            "@bpmnElement": "Task_6",
+            "dc:Bounds": {
+              "@x": "800",
+              "@y": "80",
+              "@width": "100",
+              "@height": "80"
+            }
+          },
+          {
+            "@id": "Shape_Task_7",
+            "@bpmnElement": "Task_7",
+            "dc:Bounds": {
+              "@x": "940",
+              "@y": "80",
+              "@width": "100",
+              "@height": "80"
+            }
+          },
+          {
+            "@id": "Shape_Task_8",
+            "@bpmnElement": "Task_8",
+            "dc:Bounds": {
+              "@x": "1080",
+              "@y": "80",
+              "@width": "100",
+              "@height": "80"
+            }
+          },
+          {
+            "@id": "Shape_EndEvent_1",
+            "@bpmnElement": "EndEvent_1",
+            "dc:Bounds": {
+              "@x": "1220",
+              "@y": "100",
+              "@width": "24",
+              "@height": "24"
+            }
+          }
+        ],
+        "bpmndi:BPMNEdge": [
+          {
+            "@id": "Edge_Flow_1",
+            "@bpmnElement": "Flow_1",
+            "di:waypoint": [
+              {
+                "@x": "68",
+                "@y": "112"
+              },
+              {
+                "@x": "100",
+                "@y": "120"
+              }
+            ]
+          },
+          {
+            "@id": "Edge_Flow_2",
+            "@bpmnElement": "Flow_2",
+            "di:waypoint": [
+              {
+                "@x": "200",
+                "@y": "120"
+              },
+              {
+                "@x": "240",
+                "@y": "120"
+              }
+            ]
+          },
+          {
+            "@id": "Edge_Flow_3",
+            "@bpmnElement": "Flow_3",
+            "di:waypoint": [
+              {
+                "@x": "340",
+                "@y": "120"
+              },
+              {
+                "@x": "380",
+                "@y": "120"
+              }
+            ]
+          },
+          {
+            "@id": "Edge_Flow_4",
+            "@bpmnElement": "Flow_4",
+            "di:waypoint": [
+              {
+                "@x": "480",
+                "@y": "120"
+              },
+              {
+                "@x": "520",
+                "@y": "120"
+              }
+            ]
+          },
+          {
+            "@id": "Edge_Flow_5",
+            "@bpmnElement": "Flow_5",
+            "di:waypoint": [
+              {
+                "@x": "620",
+                "@y": "120"
+              },
+              {
+                "@x": "660",
+                "@y": "120"
+              }
+            ]
+          },
+          {
+            "@id": "Edge_Flow_6",
+            "@bpmnElement": "Flow_6",
+            "di:waypoint": [
+              {
+                "@x": "760",
+                "@y": "120"
+              },
+              {
+                "@x": "800",
+                "@y": "120"
+              }
+            ]
+          },
+          {
+            "@id": "Edge_Flow_7",
+            "@bpmnElement": "Flow_7",
+            "di:waypoint": [
+              {
+                "@x": "900",
+                "@y": "120"
+              },
+              {
+                "@x": "940",
+                "@y": "120"
+              }
+            ]
+          },
+          {
+            "@id": "Edge_Flow_8",
+            "@bpmnElement": "Flow_8",
+            "di:waypoint": [
+              {
+                "@x": "1040",
+                "@y": "120"
+              },
+              {
+                "@x": "1080",
+                "@y": "120"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

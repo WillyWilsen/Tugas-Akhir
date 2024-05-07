@@ -1,0 +1,88 @@
+Create a BPMN in the following JSON format!
+
+Rules:
+1. bpmn:participant has each @processRef as a pool
+2. bpmn:messageFlow must connect one pool to another pool by task or event as @sourceRef and @targetRef (every task or event in the different pool must be connected by bpmn:messageFlow)
+3. bpmn:sequenceFlow only connect tasks or events in a pool as @sourceRef and @targetRef (every task or event in the same pool must be connected by bpmn:sequenceFlow)
+
+Syntax:
+{
+  bpmn:definitions: {
+    @xmlns:xsi: string | required
+    @xmlns:bpmn: string | required
+    @xmlns:bpmndi: string | required
+    @xmlns:dc: string | required
+    @xmlns:di: string | required
+    @id: string | required
+    @targetNamespace: string | required
+    @exporter: string | required
+    @exporterVersion: string | required
+    bpmn:collaboration: {
+      @id: string | required
+      bpmn:participant: [
+        {
+          @id: string | required
+          @name: string | required
+          @processRef: string | required
+        } | required
+      ] | required
+      bpmn:messageFlow: [
+        {
+          @id: string | required
+          @sourceRef: string | required
+          @targetRef: string | required
+        } | required
+      ] | required
+    } | required
+    bpmn:process: [
+      {
+        @id: string | required
+        bpmn:laneSet: {
+          @id: string | required
+        } | required
+        bpmn:startEvent: {
+          @id: string | required
+          @name: string | required
+          bpmn:outgoing: string | string[] | required
+        } | optional
+        bpmn:task: [
+          {
+            @id: string | required
+            @name: string | required
+            bpmn:incoming: string | string[] | optional
+            bpmn:outgoing: string | string[] | optional
+          } | required
+        ] | required
+        bpmn:sequenceFlow: {
+          @id: string | required
+          @sourceRef: string | required
+          @targetRef: string | required
+        } | optional
+        bpmn:intermediateThrowEvent: {
+          @id: string | required
+          @name: string | required
+        } | optional
+        bpmn:exclusiveGateway: {
+          @id: string | required
+          bpmn:incoming: string | required
+          bpmn:outgoing: string[] | required
+        } | optional
+        bpmn:endEvent: {
+          @id: string | required
+          @name: string | required
+          "bpmn:incoming": string | string[] | required
+        }
+      } | required
+    ] | required
+  } | required
+} | required
+
+Text:
+- Maju Bangun practice corruption
+- Budi Santoso persuaded Andi Wijaya
+- Andi Wijaya accepted bribes
+- Linda Setiawan becomes a intermediary
+- Linda Setiawan distributed the bribe money and made transfers to fake companies
+- Maju Bangun violates construction material standards
+- Dian Prasetyo knows and being silenced by internal pressure
+- Rini Susanti as a whistleblower report to Corruption Eradication Commission
