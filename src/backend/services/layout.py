@@ -152,19 +152,28 @@ def generate_layout(data):
   distance_event_label_to_layout = 7
 
   # Calculate participant width
+  max_width = distance_each_element
+  width = distance_each_element
   participant_keys = list(participants.keys())
   for participant_key in participant_keys:
     # Calculate width
     for task in participants[participant_key]['bpmn:task']:
-      participant_layout['width'] += task_layout['width'] + distance_each_element
+      width += task_layout['width'] + distance_each_element
     for start_event in participants[participant_key]['bpmn:startEvent']:
-      participant_layout['width'] += start_event_layout['width'] + distance_each_element
+      width += start_event_layout['width'] + distance_each_element
     for intermediate_throw_event in participants[participant_key]['bpmn:intermediateThrowEvent']:
-      participant_layout['width'] += intermediate_throw_event_layout['width'] + distance_each_element
+      width += intermediate_throw_event_layout['width'] + distance_each_element
     for exclusive_gateway in participants[participant_key]['bpmn:exclusiveGateway']:
-      participant_layout['width'] += exclusive_gateway_layout['width'] + distance_each_element
+      width += exclusive_gateway_layout['width'] + distance_each_element
     for end_event in participants[participant_key]['bpmn:endEvent']:
-      participant_layout['width'] += end_event_layout['width'] + distance_each_element
+      width += end_event_layout['width'] + distance_each_element
+    
+    if width > max_width:
+      max_width = width
+    width = distance_each_element
+
+  participant_layout['width'] = max_width
+    
 
   # Generate BPMN Layout
   x = 50
@@ -284,6 +293,7 @@ def generate_layout(data):
       x += end_event_layout['width'] + distance_each_element
 
     y += participant_layout['height']
+    x = distance_each_element
 
   # Sequence Flow Layout
   for participant_key in participant_keys:
@@ -345,23 +355,23 @@ def generate_layout(data):
         break
 
     if (source_element != None and target_element != None):
-      if int(source_element['@x']) < int(target_element['@x']):
+      if int(source_element['@y']) < int(target_element['@y']):
         edge['di:waypoint'].append({
-          '@x': str(int(source_element['@x']) + int(source_element['@width'])),
-          '@y': str(int(source_element['@y']) + int(source_element['@height']) // 2)
+          '@x': str(int(source_element['@x']) + int(source_element['@width']) // 2),
+          '@y': str(int(source_element['@y']) + int(source_element['@height']))
         })
         edge['di:waypoint'].append({
-          '@x': str(int(target_element['@x'])),
-          '@y': str(int(target_element['@y']) + int(target_element['@height']) // 2)
+          '@x': str(int(target_element['@x']) + int(target_element['@width']) // 2),
+          '@y': str(int(target_element['@y']))
         })
       else:
         edge['di:waypoint'].append({
-          '@x': str(int(source_element['@x'])),
-          '@y': str(int(source_element['@y']) + int(source_element['@height']) // 2)
+          '@x': str(int(source_element['@x']) + int(source_element['@width']) // 2),
+          '@y': str(int(source_element['@y']))
         })
         edge['di:waypoint'].append({
-          '@x': str(int(target_element['@x']) + int(target_element['@width'])),
-          '@y': str(int(target_element['@y']) + int(target_element['@height']) // 2)
+          '@x': str(int(target_element['@x']) + int(target_element['@width']) // 2),
+          '@y': str(int(target_element['@y']) + int(target_element['@height']))
         })
 
       BPMNEdge.append(edge)

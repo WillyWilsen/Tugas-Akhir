@@ -11,7 +11,7 @@ fewshot_BPMN_Sketch_Miner_input2 = 'fewshot_BPMN_Sketch_Miner/input2.txt'
 fewshot_BPMN_Sketch_Miner_output2 = 'fewshot_BPMN_Sketch_Miner/output2.txt'
 
 # Generate BPMN Sketch Miner
-def generate_bpmn_sketch_miner(file_summarizations):
+def generate_bpmn_sketch_miner(file_summarizations, parameter):
   # Few-shot BPMN Learning
   with open(fewshot_BPMN_Sketch_Miner_input1, 'r') as file:
     fewshot_BPMN_Sketch_Miner_input1_text = file.read()
@@ -52,6 +52,8 @@ def generate_bpmn_sketch_miner(file_summarizations):
 
   Text:
   ''' + ''.join(file_summarizations)
+  if parameter != '':
+    user_msg += f'\n\nTask Parameter: {parameter}'
 
   # Get response
   response = openai.ChatCompletion.create(

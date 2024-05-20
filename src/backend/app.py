@@ -1,4 +1,3 @@
-import json
 import xmltodict
 from datetime import datetime
 from flask import Flask, request, jsonify, send_from_directory
@@ -15,9 +14,10 @@ CORS(app)
 def handle_bpmn_js():
   current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
   file = request.files['file']
+  parameter = request.form['parameter']
   file_name = f'output/{current_time}_{file.filename}'
   file_summarizations = summarize_document(file)
-  bpmn = generate_bpmn_js(file_summarizations)
+  bpmn = generate_bpmn_js(file_summarizations, parameter)
   with open(f'{file_name}.json', 'w') as file:
     file.write(bpmn)
   bpmn_with_layout = generate_layout(bpmn)
@@ -29,8 +29,9 @@ def handle_bpmn_js():
 @app.route('/api/bpmn-sketch-miner', methods=['POST'])
 def handle_bpmn_sketch_miner():
   file = request.files['file']
+  parameter = request.form['parameter']
   file_summarizations = summarize_document(file)
-  bpmn_string = generate_bpmn_sketch_miner(file_summarizations)
+  bpmn_string = generate_bpmn_sketch_miner(file_summarizations, parameter)
   return jsonify(bpmn_string)
   
 @app.route('/api/output/<path:filename>', methods=['GET'])

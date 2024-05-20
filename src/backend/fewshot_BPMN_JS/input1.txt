@@ -1,81 +1,83 @@
 Create a BPMN in the following JSON format!
 
 Rules:
-1. bpmn:participant has each @processRef as a pool
-2. bpmn:messageFlow must connect one pool to another pool by task or event as @sourceRef and @targetRef (every task or event in the different pool must be connected by bpmn:messageFlow)
-3. bpmn:sequenceFlow only connect tasks or events in a pool as @sourceRef and @targetRef (every task or event in the same pool must be connected by bpmn:sequenceFlow)
+1. bpmn:participant has each @processRef as a swimlane
+2. bpmn:messageFlow must connect one swimlane to another swimlane by task or event as @sourceRef and @targetRef (every task or event in the different swimlane must be connected by bpmn:messageFlow)
+3. bpmn:sequenceFlow only connect tasks or events in a swimlane as @sourceRef and @targetRef (every task or event in the same swimlane must be connected by bpmn:sequenceFlow)
+4. Each bpmn:task must have bpmn:sequenceFlow or bpmn:messageFlow element at least once as source and once as target.
+5. output can only have one bpmn:startEvent as the opening BPMN and one bpmn:endEvent as the closing BPMN
 
 Syntax:
 {
   bpmn:definitions: {
-    @xmlns:xsi: string | required
-    @xmlns:bpmn: string | required
-    @xmlns:bpmndi: string | required
-    @xmlns:dc: string | required
-    @xmlns:di: string | required
-    @id: string | required
-    @targetNamespace: string | required
-    @exporter: string | required
-    @exporterVersion: string | required
+    @xmlns:xsi
+    @xmlns:bpmn
+    @xmlns:bpmndi
+    @xmlns:dc
+    @xmlns:di
+    @id
+    @targetNamespace
+    @exporter
+    @exporterVersion
     bpmn:collaboration: {
-      @id: string | required
+      @id
       bpmn:participant: [
         {
-          @id: string | required
-          @name: string | required
-          @processRef: string | required
-        } | required
-      ] | required
+          @id
+          @name
+          @processRef
+        }
+      ]
       bpmn:messageFlow: [
         {
-          @id: string | required
-          @sourceRef: string | required
-          @targetRef: string | required
-        } | required
-      ] | required
-    } | required
+          @id
+          @sourceRef
+          @targetRef
+        }
+      ]
+    }
     bpmn:process: [
       {
-        @id: string | required
+        @id
         bpmn:laneSet: {
-          @id: string | required
-        } | required
+          @id
+        }
         bpmn:startEvent: {
-          @id: string | required
-          @name: string | required
-          bpmn:outgoing: string | string[] | required
-        } | optional
+          @id
+          @name
+          bpmn:outgoing:
+        }
         bpmn:task: [
           {
-            @id: string | required
-            @name: string | required
-            bpmn:incoming: string | string[] | optional
-            bpmn:outgoing: string | string[] | optional
-          } | required
-        ] | required
+            @id
+            @name
+            bpmn:incoming
+            bpmn:outgoing
+          }
+        ]
         bpmn:sequenceFlow: {
-          @id: string | required
-          @sourceRef: string | required
-          @targetRef: string | required
-        } | optional
-        bpmn:intermediateThrowEvent: {
-          @id: string | required
-          @name: string | required
-        } | optional
-        bpmn:exclusiveGateway: {
-          @id: string | required
-          bpmn:incoming: string | required
-          bpmn:outgoing: string[] | required
-        } | optional
-        bpmn:endEvent: {
-          @id: string | required
-          @name: string | required
-          "bpmn:incoming": string | string[] | required
+          @id
+          @sourceRef
+          @targetRef
         }
-      } | required
-    ] | required
-  } | required
-} | required
+        bpmn:intermediateThrowEvent: {
+          @id
+          @name
+        }
+        bpmn:exclusiveGateway: {
+          @id
+          bpmn:incoming
+          bpmn:outgoing
+        }
+        bpmn:endEvent: {
+          @id
+          @name
+          bpmn:incoming
+        }
+      }
+    ]
+  }
+}
 
 Text:
 - InnovateTech discovered information theft
