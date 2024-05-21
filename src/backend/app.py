@@ -17,6 +17,8 @@ def handle_bpmn_js():
   parameter = request.form['parameter']
   file_name = f'output/{current_time}_{file.filename}'
   file_summarizations = summarize_document(file)
+  with open(f'{file_name}_summary.txt', 'w') as file:
+    file.write(''.join(file_summarizations))
   bpmn = generate_bpmn_js(file_summarizations, parameter)
   with open(f'{file_name}.json', 'w') as file:
     file.write(bpmn)
