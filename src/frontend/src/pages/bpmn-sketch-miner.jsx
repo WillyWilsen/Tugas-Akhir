@@ -9,13 +9,15 @@ import {
   AlertIcon,
   Input,
   Textarea,
+  Select,
 } from '@chakra-ui/react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 export const BPMN_Sketch_Miner = () => {
   const [file, setFile] = useState(null);
-  const [parameter, setParameter] = useState('');
+  const [summarizationType, setSummarizationType] = useState('RAG-LLM');
+  const [query, setQuery] = useState('');
   const [errorText, setErrorText] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState('');
@@ -30,7 +32,8 @@ export const BPMN_Sketch_Miner = () => {
 
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('parameter', parameter);
+      formData.append('summarizationType', summarizationType);
+      formData.append('query', query);
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/bpmn-sketch-miner`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -60,8 +63,15 @@ export const BPMN_Sketch_Miner = () => {
           <Input type="file" borderWidth="1px" borderColor="black" size="sm" onChange={e => setFile(e.target.files?.length ? (e.target.files?.length > 0 ? e.target.files[0] : null) : null)} width="50%" />
         </FormControl>
         <FormControl mt="2">
-          <FormLabel>Parameter</FormLabel>
-          <Textarea rows={3} borderWidth="1px" borderColor="black" size="sm" placeholder='Detailed information to be provided' onChange={e => setParameter(e.target.value)} width="50%" />
+          <FormLabel>Summarization Type</FormLabel>
+          <Select borderWidth="1px" borderColor="black" placeholder='Summarization type' defaultValue={summarizationType} onChange={e => setSummarizationType(e.target.value)} width="50%" >
+            <option value={"RAG-LLM"}>RAG + LLM</option>
+            <option value={"LLM"}>LLM</option>
+          </Select>
+        </FormControl>
+        <FormControl mt="2">
+          <FormLabel>Query</FormLabel>
+          <Textarea rows={3} borderWidth="1px" borderColor="black" size="sm" placeholder='Detailed information to be provided' onChange={e => setQuery(e.target.value)} width="50%" />
         </FormControl>
         <FormControl mt="2">
           <Button colorScheme="green" size="md" mx="1" isLoading={loading} onClick={generateBPMN}>Generate</Button>

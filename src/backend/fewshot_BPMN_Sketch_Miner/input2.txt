@@ -24,11 +24,4 @@ Output Rules:
 2. Output must be ended by (finish End)
 
 Text:
-- Maju Bangun practice corruption
-- Budi Santoso persuaded Andi Wijaya
-- Andi Wijaya accepted bribes
-- Linda Setiawan becomes a intermediary
-- Linda Setiawan distributed the bribe money and made transfers to fake companies
-- Maju Bangun violates construction material standards
-- Dian Prasetyo knows and being silenced by internal pressure
-- Rini Susanti as a whistleblower report to Corruption Eradication Commission
+Maju Bangun practice corruption. Budi Santoso persuaded Andi Wijaya. Andi Wijaya accepted bribes. Linda Setiawan becomes a intermediary. Linda Setiawan distributed the bribe money and made transfers to fake companies. Maju Bangun violates construction material standards. Dian Prasetyo knows and being silenced by internal pressure. Rini Susanti as a whistleblower report to Corruption Eradication Commission.

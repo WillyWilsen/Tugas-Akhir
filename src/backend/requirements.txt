@@ -4,3 +4,4 @@ openai
 PyPDF2
 xmltodict
 python-dotenv
+langchain

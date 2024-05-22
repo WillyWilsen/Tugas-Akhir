@@ -21,7 +21,7 @@ def extract_text_from_pdf(file):
   return text
 
 # Summarize document
-def summarize_document(file):
+def summarize_document_llm(file, query):
   # Extract file to text
   text = extract_text_from_pdf(file)
   
@@ -40,13 +40,16 @@ def summarize_document(file):
   raw_text_chunks = textwrap.wrap(text, width=max_tokens)
 
   # Process each chunk
-  summarization_results = []
+  summaries = []
   for chunk in raw_text_chunks:
     system_msg = 'You are a very skilled assistant in summarizing process models from a legal document. You will help me in summarizing the process model from the document I provided.'
     user_msg = f'''
-    Make a summary of the process model in the form of action points carried out by the subject without opening and closing statement from the following document!
+    Summarize the action process model performed by the subject without opening and closing statements from the following document!
 
     {chunk}
+
+    Query:
+    {query}
     '''
 
     # Get response
@@ -62,6 +65,6 @@ def summarize_document(file):
       ]
     )
     print(response)
-    summarization_results.append(response['choices'][0]['message']['content'])
+    summaries.append(response['choices'][0]['message']['content'])
 
-  return summarization_results
+  return ''.join(summaries)

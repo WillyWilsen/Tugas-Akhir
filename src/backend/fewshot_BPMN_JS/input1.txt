@@ -80,10 +80,4 @@ Syntax:
 }
 
 Text:
-- InnovateTech discovered information theft
-- CEO Alex Miller recruits Laura Davis and Michael Turner
-- CEO Alex Miller founded TechInnovate
-- TechInnovate mimicked InnovateTech's product and strategy
-- InnovateTech felt aggrieved and filed a lawsuit
-- InnovateTech Legal Team involved and court processed law
-- If TechInnovate is found guilty, court convicts TechInnovate of intellectual property theft
+InnovateTech discovered information theft. CEO Alex Miller recruits Laura Davis and Michael Turner. CEO Alex Miller founded TechInnovate. TechInnovate mimicked InnovateTech's product and strategy. InnovateTech felt aggrieved and filed a lawsuit. InnovateTech Legal Team involved and court processed law. If TechInnovate is found guilty, court convicts TechInnovate of intellectual property theft.

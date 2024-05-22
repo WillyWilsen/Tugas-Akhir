@@ -11,7 +11,7 @@ fewshot_BPMN_JS_input2 = 'fewshot_BPMN_JS/input2.txt'
 fewshot_BPMN_JS_output2 = 'fewshot_BPMN_JS/output2.txt'
 
 # Generate BPMN JS
-def generate_bpmn_js(file_summarizations, parameter):
+def generate_bpmn_js(summary):
   # Few-shot BPMN Learning
   with open(fewshot_BPMN_JS_input1, 'r') as file:
     fewshot_BPMN_JS_input1_text = file.read()
@@ -107,10 +107,8 @@ def generate_bpmn_js(file_summarizations, parameter):
   }
 
   Text:
-  ''' + ''.join(file_summarizations)
-  if parameter != '':
-    user_msg += f'\n\nTask Parameter: {parameter}'
-
+  ''' + summary
+  
   # Get response
   response = openai.ChatCompletion.create(
     model="gpt-4-turbo",
