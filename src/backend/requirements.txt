@@ -1,6 +1,6 @@
 flask
 flask_cors
-openai
+openai==0.28
 PyPDF2
 xmltodict
 python-dotenv
