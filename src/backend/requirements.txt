@@ -4,4 +4,4 @@ openai==0.28
 PyPDF2
 xmltodict
 python-dotenv
-langchain
+langchain==0.0.336
