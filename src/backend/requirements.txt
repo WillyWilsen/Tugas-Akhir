@@ -5,3 +5,4 @@ PyPDF2
 xmltodict
 python-dotenv
 langchain==0.0.336
+tiktoken
