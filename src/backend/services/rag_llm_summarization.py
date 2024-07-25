@@ -40,6 +40,7 @@ def summarize_document_rag_llm(file, query):
   )
   docsearch = FAISS.from_texts(texts, embeddings)
   retriever = docsearch.as_retriever()
+
   chain = RetrievalQA.from_chain_type(
     llm=OpenAI(model_name="gpt-3.5-turbo-instruct"), 
     chain_type="stuff", 

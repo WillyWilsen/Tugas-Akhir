@@ -1,8 +1,4 @@
-import json
-
 def generate_layout(data):
-  data = json.loads(data)
-
   # Find participants with the process
   collaboration_id = None
   participants = {}
@@ -296,6 +292,7 @@ def generate_layout(data):
     x = distance_each_element
 
   # Sequence Flow Layout
+  print(participant_keys)
   for participant_key in participant_keys:
     for sequence_flow in participants[participant_key]['bpmn:sequenceFlow']:
       edge = {
@@ -315,23 +312,42 @@ def generate_layout(data):
           break
       
       if (source_element != None and target_element != None):
-        if int(source_element['@x']) < int(target_element['@x']):
+        # if int(source_element['@x']) < int(target_element['@x']):
+        #   edge['di:waypoint'].append({
+        #     '@x': str(int(source_element['@x']) + int(source_element['@width'])),
+        #     '@y': str(int(source_element['@y']) + int(source_element['@height']) // 2)
+        #   })
+        #   edge['di:waypoint'].append({
+        #     '@x': str(int(target_element['@x'])),
+        #     '@y': str(int(target_element['@y']) + int(target_element['@height']) // 2)
+        #   })
+        # else:
+        #   edge['di:waypoint'].append({
+        #     '@x': str(int(source_element['@x'])),
+        #     '@y': str(int(source_element['@y']) + int(source_element['@height']) // 2)
+        #   })
+        #   edge['di:waypoint'].append({
+        #     '@x': str(int(target_element['@x']) + int(target_element['@width'])),
+        #     '@y': str(int(target_element['@y']) + int(target_element['@height']) // 2)
+        #   })
+
+        if int(source_element['@y']) < int(target_element['@y']):
           edge['di:waypoint'].append({
-            '@x': str(int(source_element['@x']) + int(source_element['@width'])),
-            '@y': str(int(source_element['@y']) + int(source_element['@height']) // 2)
+            '@x': str(int(source_element['@x']) + int(source_element['@width']) // 2),
+            '@y': str(int(source_element['@y']) + int(source_element['@height']))
           })
           edge['di:waypoint'].append({
-            '@x': str(int(target_element['@x'])),
-            '@y': str(int(target_element['@y']) + int(target_element['@height']) // 2)
+            '@x': str(int(target_element['@x']) + int(target_element['@width']) // 2),
+            '@y': str(int(target_element['@y']))
           })
         else:
           edge['di:waypoint'].append({
-            '@x': str(int(source_element['@x'])),
-            '@y': str(int(source_element['@y']) + int(source_element['@height']) // 2)
+            '@x': str(int(source_element['@x']) + int(source_element['@width']) // 2),
+            '@y': str(int(source_element['@y']))
           })
           edge['di:waypoint'].append({
-            '@x': str(int(target_element['@x']) + int(target_element['@width'])),
-            '@y': str(int(target_element['@y']) + int(target_element['@height']) // 2)
+            '@x': str(int(target_element['@x']) + int(target_element['@width']) // 2),
+            '@y': str(int(target_element['@y']) + int(target_element['@height']))
           })
 
         BPMNEdge.append(edge)

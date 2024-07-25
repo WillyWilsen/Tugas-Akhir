@@ -1,0 +1,230 @@
+Create a BPMN JSON for all of the following actors and sentences using the following JSON syntax and rules!
+You need to give me the answer in Bahasa Indonesia!
+Syntax:
+{
+  nodes: [
+    {
+      "node_id": int,
+      "node_participant": string,
+      "node_type": enum("startEvent", "task", "intermediateThrowEvent", "exclusiveGateway", "endEvent"),
+      "node_name": string,
+      "node_parent_id": int
+    }
+  ]
+}
+Rules:
+1. Each actor must be included in node_participant
+2. nodes must have 1 node_type = startEvent with node_parent_id = 0
+3. nodes must have node_parent_id <> 0 except node_type = startEvent
+4. Each conditional sentence is represented with node_type = exclusiveGateway
+5. Each thrown event is represented with node_type = intermediateThrowEvent
+6. Convert all the following sentences into nodes according to the syntax
+
+###
+Actors: """
+InnovateTech, CEO Alex Miller, TechInnovate, InnovateTech Legal Team, Court.
+"""
+Sentences: """
+(1) InnovateTech discovered information theft. 
+(2) CEO Alex Miller recruits Laura Davis and Michael Turner. 
+(3) CEO Alex Miller founded TechInnovate. 
+(4) TechInnovate mimicked InnovateTech's product and strategy. 
+(5) InnovateTech felt aggrieved and filed a lawsuit. 
+(6) InnovateTech Legal Team involved and court processed law. 
+(7) If TechInnovate is found guilty, court convicts TechInnovate of intellectual property theft.
+"""
+Output:
+{
+  "nodes": [
+    {
+      "node_id": 1,
+      "node_participant": "InnovateTech",
+      "node_type": "startEvent",
+      "node_name": "Start",
+      "node_parent_id": 0
+    },
+    {
+      "node_id": 2,
+      "node_participant": "InnovateTech",
+      "node_type": "task",
+      "node_name": "Discovering information theft",
+      "node_parent_id": 1
+    },
+    {
+      "node_id": 3,
+      "node_participant": "CEO_Alex_Miller",
+      "node_type": "task",
+      "node_name": "Recruited Laura Davis and Michael Turner",
+      "node_parent_id": 2
+    },
+    {
+      "node_id": 4,
+      "node_participant": "CEO_Alex_Miller",
+      "node_type": "task",
+      "node_name": "Founded TechInnovate",
+      "node_parent_id": 3
+    },
+    {
+      "node_id": 5,
+      "node_participant": "TechInnovate",
+      "node_type": "task",
+      "node_name": "Mimicking InnovateTech's Products and Strategy",
+      "node_parent_id": 4
+    },
+    {
+      "node_id": 6,
+      "node_participant": "InnovateTech",
+      "node_type": "task",
+      "node_name": "Feeling Aggrieved and Filing a Lawsuit",
+      "node_parent_id": 5
+    },
+    {
+      "node_id": 7,
+      "node_participant": "InnovateTech_Legal_Team",
+      "node_type": "intermediateThrowEvent",
+      "node_name": "Involved",
+      "node_parent_id": 6
+    },
+    {
+      "node_id": 8,
+      "node_participant": "Court",
+      "node_type": "task",
+      "node_name": "Law Processing",
+      "node_parent_id": 7
+    },
+    {
+      "node_id": 9,
+      "node_participant": "Court",
+      "node_type": "exclusiveGateway",
+      "node_name": "Proven TechInnovate committed Intellectual Property Theft?",
+      "node_parent_id": 8
+    },
+    {
+      "node_id": 10,
+      "node_participant": "Court",
+      "node_type": "task",
+      "node_name": "Convicted TechInnovate of Intellectual Property Theft",
+      "node_parent_id": 9
+    },
+    {
+      "node_id": 11,
+      "node_participant": "Court",
+      "node_type": "endEvent",
+      "node_name": "End",
+      "node_parent_id": 10
+    },
+    {
+      "node_id": 12,
+      "node_participant": "Court",
+      "node_type": "task",
+      "node_name": "Not penalizing TechInnovate",
+      "node_parent_id": 9
+    },
+    {
+      "node_id": 13,
+      "node_participant": "Court",
+      "node_type": "endEvent",
+      "node_name": "End",
+      "node_parent_id": 12
+    }
+  ]
+}
+
+###
+Actors: """
+Maju Bangun, Budi Santoso, Andi Wijaya, Linda Setiawan, Dian Prasetyo, Rini Susanti.
+"""
+Sentences: """
+(1) Maju Bangun practice corruption. 
+(2) Budi Santoso persuaded Andi Wijaya. 
+(3) Andi Wijaya accepted bribes. 
+(4) Linda Setiawan becomes a intermediary. 
+(5) Linda Setiawan distributed the bribe money and made transfers to fake companies. 
+(6) Maju Bangun violates construction material standards. 
+(7) Dian Prasetyo knows and being silenced by internal pressure. 
+(8) Rini Susanti as a whistleblower report to Corruption Eradication Commission.
+"""
+Output:
+{
+  "nodes": [
+    {
+      "node_id": 1,
+      "node_participant": "Maju_Bangun",
+      "node_type": "startEvent",
+      "node_name": "Start",
+      "node_parent_id": 0
+    },
+    {
+      "node_id": 2,
+      "node_participant": "Maju_Bangun",
+      "node_type": "task",
+      "node_name": "Corrupt Practices",
+      "node_parent_id": 1
+    },
+    {
+      "node_id": 3,
+      "node_participant": "Budi_Santoso",
+      "node_type": "task",
+      "node_name": "Persuading Andi Wijaya",
+      "node_parent_id": 2
+    },
+    {
+      "node_id": 4,
+      "node_participant": "Andi_Wijaya",
+      "node_type": "task",
+      "node_name": "Accepting Bribes",
+      "node_parent_id": 3
+    },
+    {
+      "node_id": 5,
+      "node_participant": "Linda_Setiawan",
+      "node_type": "task",
+      "node_name": "Become an Intermediary",
+      "node_parent_id": 4
+    },
+    {
+      "node_id": 6,
+      "node_participant": "Linda_Setiawan",
+      "node_type": "task",
+      "node_name": "Distribution of Bribes and Transfers to Fake Companies",
+      "node_parent_id": 5
+    },
+    {
+      "node_id": 7,
+      "node_participant": "Maju_Bangun",
+      "node_type": "task",
+      "node_name": "Violating Construction Material Standards",
+      "node_parent_id": 6
+    },
+    {
+      "node_id": 8,
+      "node_participant": "Dian_Prasetyo",
+      "node_type": "task",
+      "node_name": "Knowing and Being Silenced by Internal Pressure",
+      "node_parent_id": 7
+    },
+    {
+      "node_id": 9,
+      "node_participant": "Rini_Susanti",
+      "node_type": "intermediateThrowEvent",
+      "node_name": "As a Whistleblower",
+      "node_parent_id": 8
+    },
+    {
+      "node_id": 10,
+      "node_participant": "Rini_Susanti",
+      "node_type": "task",
+      "node_name": "Report to the Corruption Eradication Commission",
+      "node_parent_id": 9
+    },
+    {
+      "node_id": 11,
+      "node_participant": "Rini_Susanti",
+      "node_type": "endEvent",
+      "node_name": "End",
+      "node_parent_id": 10
+    }
+  ]
+}
+
+###

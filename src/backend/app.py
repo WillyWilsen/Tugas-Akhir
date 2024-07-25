@@ -1,12 +1,16 @@
 import xmltodict
+import json
 from datetime import datetime
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from services.bpmn_js import generate_bpmn_js
 from services.bpmn_sketch_miner import generate_bpmn_sketch_miner
-from services.layout import generate_layout
+from services.bpmn_layout import generate_layout
 from services.llm_summarization import summarize_document_llm
 from services.rag_llm_summarization import summarize_document_rag_llm
+from services.rag_gpt import get_relevant_texts_rag_gpt
+from services.bpmn_json_generator import generate_bpmn_json
+from services.bpmn_json_merger import merge_bpmn_json
 
 app = Flask(__name__)
 CORS(app)
@@ -20,16 +24,20 @@ def handle_bpmn_js():
   file_name = f'output/{current_time}_{file.filename}'
 
   if summarizationType == 'RAG-LLM':
-    summary = summarize_document_rag_llm(file, query)
+    summary = get_relevant_texts_rag_gpt(file, query)
+    # summary = summarize_document_rag_llm(file, query)
   else:
     summary = summarize_document_llm(file, query)
   with open(f'{file_name}_summary.txt', 'w') as file:
     file.write(summary)
 
-  bpmn = generate_bpmn_js(summary)
+  bpmn_json = generate_bpmn_json(summary)
   with open(f'{file_name}.json', 'w') as file:
-    file.write(bpmn)
-  bpmn_with_layout = generate_layout(bpmn)
+    file.write(bpmn_json)
+  bpmn = merge_bpmn_json(json.loads(bpmn_json))
+  with open(f'{file_name}_merged.json', 'w') as file:
+    file.write(json.dumps(bpmn))
+  bpmn_with_layout = generate_layout(bpmn, json.loads(bpmn_json))
   bpmn_xml = xmltodict.unparse(bpmn_with_layout, pretty=True)
   with open(f'{file_name}.bpmn', 'w') as file:
     file.write(bpmn_xml)
@@ -44,7 +52,7 @@ def handle_bpmn_sketch_miner():
   file_name = f'output/{current_time}_{file.filename}'
 
   if summarizationType == 'RAG-LLM':
-    summary = summarize_document_rag_llm(file, query)
+    summary = get_relevant_texts_rag_gpt(file, query)
   else:
     summary = summarize_document_llm(file, query)
   with open(f'{file_name}_summary.txt', 'w') as file:

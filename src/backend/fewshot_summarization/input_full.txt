@@ -1,0 +1,32 @@
+Process model in legal documents refers to a standard structure or format used to draft or organize a particular legal document. It includes steps or stages that must be followed to achieve a certain goal in a legal context.
+
+Summarize the process model of the actions performed by the actors involved in the following paragraphs! Model the sequential process of each sentence!
+
+###
+Sentences: """
+A leading technology company, InnovateTech, discovered that some of their former employees were leaking company secrets and planning to start a new company that competes unfairly. This action involved several individuals, including the new CEO of a rival company, an engineer who had access to product planning, and a financial analyst who devised a marketing strategy. The story begins when a rival company's new CEO, Alex Miller, recruits a senior engineer, Laura Davis, and a financial analyst, Michael Turner, from InnovateTech. They bring confidential information about unreleased products, business plans, and marketing strategies. Next, they founded a new company, TechInnovate, which openly copied InnovateTech's innovations and products. InnovateTech felt aggrieved and filed a lawsuit against TechInnovate, Alex Miller, Laura Davis, and Michael Turner for intellectual property theft, breach of contract, and unfair business competition. The legal process involves lawyers from both parties, InnovateTech's internal legal team, and the court as the party that determines the fate of the case. If TechInnovate is found guilty, TechInnovate will be punished for intellectual property theft.
+"""
+Summary:
+- InnovateTech discovered information theft. 
+- CEO Alex Miller recruits Laura Davis and Michael Turner. 
+- CEO Alex Miller founded TechInnovate. 
+- TechInnovate mimicked InnovateTech's product and strategy. 
+- InnovateTech felt aggrieved and filed a lawsuit. 
+- InnovateTech Legal Team involved and court processed law. 
+- If TechInnovate is found guilty, court convicts TechInnovate of intellectual property theft.
+
+###
+Sentences: """
+In 2021, a complex legal case occurred involving several parties. The construction company "Maju Bangun" pretended to practice corruption and bribery in obtaining highway construction projects in certain areas. This process began when the director of the "Maju Bangun" project, Budi Santoso, persuaded a government official, Andi Wijaya, to provide a certain amount of money to give the project to their company. Andi Wijaya, as the decision-making official, accepted bribes from Budi Santoso and ensured that "Maju Bangun" won the project contract. The bribe money was channeled through an intermediary, Linda Setiawan, a businessman who has connections with the parties involved. Linda Setiawan, as her partner, distributed the bribe money to several secret accounts and made transfers to several fake companies to support the trail. When the highway construction project began, it was revealed that the construction materials used by "Maju Bangun" did not comply with the standards regulated by the government. A project inspector, Dian Prasetyo, discovered the discrepancy and tried to submit a report to the supervisory agency. However, Dian Prasetyo experienced pressure from internal parties at "Maju Bangun" to remain silent and accept bribes so as not to report his findings. The legal process began when a whistleblower, Rini Susanti, who worked in the finance department of "Maju Bangun", felt uncomfortable with the corrupt practices occurring at the company. Rini Susanti decided to report this case to the Corruption Eradication Commission and provide evidence that strengthens her claims.
+"""
+Summary:
+- Maju Bangun practice corruption. 
+- Budi Santoso persuaded Andi Wijaya. 
+- Andi Wijaya accepted bribes. 
+- Linda Setiawan becomes a intermediary. 
+- Linda Setiawan distributed the bribe money and made transfers to fake companies. 
+- Maju Bangun violates construction material standards. 
+- Dian Prasetyo knows and being silenced by internal pressure. 
+- Rini Susanti as a whistleblower report to Corruption Eradication Commission.
+
+###

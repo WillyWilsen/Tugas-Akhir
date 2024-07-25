@@ -1,0 +1,492 @@
+Create a BPMN for all of the following sentences using the following rules and JSON syntax!
+You need to give me the answer in Bahasa Indonesia!
+Rules:
+1. Each subject must be included in bpmn:participant
+2. Each bpmn:participant must have at all bpmn:task included in sentences below
+3. Each bpmn:messageFlow must connect tasks or events in different participants as @sourceRef and @targetRef
+4. Each bpmn:sequenceFlow mush connect tasks or events in same participant as @sourceRef and @targetRef
+5. Each bpmn:task must have one bpmn:sequenceFlow or bpmn:messageFlow element as a source
+6. Each bpmn:task must have one bpmn:sequenceFlow or bpmn:messageFlow element as a target
+7. The generated JSON element must match the JSON element below
+Syntax:
+{
+  bpmn:definitions: {
+    @xmlns:xsi
+    @xmlns:bpmn
+    @xmlns:bpmndi
+    @xmlns:dc
+    @xmlns:di
+    @id
+    @targetNamespace
+    @exporter
+    @exporterVersion
+    bpmn:collaboration: {
+      @id
+      bpmn:participant: [
+        {
+          @id
+          @name
+          @processRef
+        }
+      ]
+      bpmn:messageFlow: [
+        {
+          @id
+          @sourceRef
+          @targetRef
+        }
+      ]
+    }
+    bpmn:process: [
+      {
+        @id
+        bpmn:laneSet: {
+          @id
+        }
+        bpmn:startEvent: {
+          @id
+          @name
+          bpmn:outgoing:
+        }
+        bpmn:task: [
+          {
+            @id
+            @name
+            bpmn:incoming
+            bpmn:outgoing
+          }
+        ]
+        bpmn:sequenceFlow: {
+          @id
+          @sourceRef
+          @targetRef
+        }
+        bpmn:intermediateThrowEvent: {
+          @id
+          @name
+        }
+        bpmn:exclusiveGateway: {
+          @id
+          bpmn:incoming
+          bpmn:outgoing
+        }
+        bpmn:endEvent: {
+          @id
+          @name
+          bpmn:incoming
+        }
+      }
+    ]
+  }
+}
+
+###
+Sentences: """
+(1) InnovateTech discovered information theft. 
+(2) CEO Alex Miller recruits Laura Davis and Michael Turner. 
+(3) CEO Alex Miller founded TechInnovate. 
+(4) TechInnovate mimicked InnovateTech's product and strategy. 
+(5) InnovateTech felt aggrieved and filed a lawsuit. 
+(6) InnovateTech Legal Team involved and court processed law. 
+(7) If TechInnovate is found guilty, court convicts TechInnovate of intellectual property theft.
+"""
+Output:
+{
+  "bpmn:definitions": {
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "@xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL",
+    "@xmlns:bpmndi": "http://www.omg.org/spec/BPMN/20100524/DI",
+    "@xmlns:dc": "http://www.omg.org/spec/DD/20100524/DC",
+    "@xmlns:di": "http://www.omg.org/spec/DD/20100524/DI",
+    "@id": "Definitions_1xh4b31",
+    "@targetNamespace": "http://bpmn.io/schema/bpmn",
+    "@exporter": "bpmn-js (https://demo.bpmn.io)",
+    "@exporterVersion": "16.4.0",
+    "bpmn:collaboration": {
+      "@id": "Collaboration_1",
+      "bpmn:participant": [
+        {
+          "@id": "Participant_InnovateTech",
+          "@name": "InnovateTech",
+          "@processRef": "Process_InnovateTech"
+        },
+        {
+          "@id": "Participant_CEO_Alex_Miller",
+          "@name": "CEO Alex Miller",
+          "@processRef": "Process_CEO_Alex_Miller"
+        },
+        {
+          "@id": "Participant_TechInnovate",
+          "@name": "TechInnovate",
+          "@processRef": "Process_TechInnovate"
+        },
+        {
+          "@id": "Participant_InnovateTech_Legal_Team",
+          "@name": "InnovateTech Legal Team",
+          "@processRef": "Process_InnovateTech_Legal_Team"
+        },
+        {
+          "@id": "Participant_Court",
+          "@name": "Court",
+          "@processRef": "Process_Court"
+        }
+      ],
+      "bpmn:messageFlow": [
+        {
+          "@id": "Flow_Activity_InnovateTech_1-Activity_CEO_Alex_Miller_1",
+          "@sourceRef": "Activity_InnovateTech_1",
+          "@targetRef": "Activity_CEO_Alex_Miller_1"
+        },
+        {
+          "@id": "Flow_Activity_CEO_Alex_MIller_2-Activity_TechInnovate_1",
+          "@sourceRef": "Activity_CEO_Alex_Miller_2",
+          "@targetRef": "Activity_TechInnovate_1"
+        },
+        {
+          "@id": "Flow_Activity_TechInnovate_1-Activity_InnovateTech_2",
+          "@sourceRef": "Activity_TechInnovate_1",
+          "@targetRef": "Activity_InnovateTech_2"
+        },
+        {
+          "@id": "Flow_Event_Involved-Activity_Court_1",
+          "@sourceRef": "Event_Involved",
+          "@targetRef": "Activity_Court_1"
+        },
+        {
+          "@id": "Flow_Event_Involved-Activity_InnovateTech_2",
+          "@sourceRef": "Event_Involved",
+          "@targetRef": "Activity_InnovateTech_2"
+        }
+      ]
+    },
+    "bpmn:process": [
+      {
+        "@id": "Process_InnovateTech",
+        "bpmn:laneSet": { "@id": "LaneSet_InnovateTech" },
+        "bpmn:startEvent": {
+          "@id": "Event_Start",
+          "@name": "Start",
+          "bpmn:outgoing": "Flow_Event_Start-Activity_InnovateTech_2"
+        },
+        "bpmn:task": [
+          {
+            "@id": "Activity_InnovateTech_1",
+            "@name": "Discovering information theft",
+            "bpmn:incoming": "Flow_Event_Start-Activity_InnovateTech_2"
+          },
+          {
+            "@id": "Activity_InnovateTech_2",
+            "@name": "Feeling Aggrieved and Filing a Lawsuit"
+          }
+        ],
+        "bpmn:sequenceFlow": {
+          "@id": "Flow_Event_Start-Activity_InnovateTech_2",
+          "@sourceRef": "Event_Start",
+          "@targetRef": "Activity_InnovateTech_1"
+        }
+      },
+      {
+        "@id": "Process_CEO_Alex_Miller",
+        "bpmn:laneSet": { "@id": "LaneSet_CEO_Alex_Miller" },
+        "bpmn:task": [
+          {
+            "@id": "Activity_CEO_Alex_Miller_1",
+            "@name": "Recruited Laura Davis and Michael Turner",
+            "bpmn:outgoing": "Flow_Activity_CEO_Alex_Miller_1-Activity_CEO_Alex_Miller_2"
+          },
+          {
+            "@id": "Activity_CEO_Alex_Miller_2",
+            "@name": "Founded TechInnovate",
+            "bpmn:incoming": "Flow_Activity_CEO_Alex_Miller_1-Activity_CEO_Alex_Miller_2"
+          }
+        ],
+        "bpmn:sequenceFlow": {
+          "@id": "Flow_Activity_CEO_Alex_Miller_1-Activity_CEO_Alex_Miller_2",
+          "@sourceRef": "Activity_CEO_Alex_Miller_1",
+          "@targetRef": "Activity_CEO_Alex_Miller_2"
+        }
+      },
+      {
+        "@id": "Process_TechInnovate",
+        "bpmn:laneSet": { "@id": "LaneSet_TechInnovate" },
+        "bpmn:task": {
+          "@id": "Activity_TechInnovate_1",
+          "@name": "Mimicking InnovateTech's Products and Strategy"
+        }
+      },
+      {
+        "@id": "Process_InnovateTech_Legal_Team",
+        "bpmn:laneSet": { "@id": "LaneSet_InnovateTech_Legal_Team" },
+        "bpmn:intermediateThrowEvent": {
+          "@id": "Event_Involved",
+          "@name": "Involved"
+        }
+      },
+      {
+        "@id": "Process_Court",
+        "bpmn:laneSet": { "@id": "LaneSet_Court" },
+        "bpmn:sequenceFlow": [
+          {
+            "@id": "Flow_Activity_Court_1-Gateway_Court_1",
+            "@sourceRef": "Activity_Court_1",
+            "@targetRef": "Gateway_Court_1"
+          },
+          {
+            "@id": "Flow_Gateway_Court_1-Activity_Court_2",
+            "@sourceRef": "Gateway_Court_1",
+            "@targetRef": "Activity_Court_2"
+          },
+          {
+            "@id": "Flow_Gateway_Court_1-Activity_Court_3",
+            "@sourceRef": "Gateway_Court_1",
+            "@targetRef": "Activity_Court_3"
+          },
+          {
+            "@id": "Flow_Activity_Court_2-Event_End",
+            "@sourceRef": "Activity_Court_2",
+            "@targetRef": "Event_End"
+          },
+          {
+            "@id": "Flow_Activtiy_Court_3-Event_End",
+            "@sourceRef": "Activity_Court_3",
+            "@targetRef": "Event_End"
+          }
+        ],
+        "bpmn:task": [
+          {
+            "@id": "Activity_Court_1",
+            "@name": "Law Processing",
+            "bpmn:outgoing": "Flow_Activity_Court_1-Gateway_Court_1"
+          },
+          {
+            "@id": "Activity_Court_2",
+            "@name": "Convicted TechInnovate of Intellectual Property Theft",
+            "bpmn:incoming": "Flow_Gateway_Court_1-Activity_Court_2",
+            "bpmn:outgoing": "Flow_Activity_Court_2-Event_End"
+          },
+          {
+            "@id": "Activity_Court_3",
+            "@name": "Not penalizing TechInnovate",
+            "bpmn:incoming": "Flow_Gateway_Court_1-Activity_Court_3",
+            "bpmn:outgoing": "Flow_Activtiy_Court_3-Event_End"
+          }
+        ],
+        "bpmn:exclusiveGateway": {
+          "@id": "Gateway_Court_1",
+          "bpmn:incoming": "Flow_Activity_Court_1-Gateway_Court_1",
+          "bpmn:outgoing": [
+            "Flow_Gateway_Court_1-Activity_Court_2",
+            "Flow_Gateway_Court_1-Activity_Court_3"
+          ]
+        },
+        "bpmn:endEvent": {
+          "@id": "Event_End",
+          "@name": "End",
+          "bpmn:incoming": [
+            "Flow_Activity_Court_2-Event_End",
+            "Flow_Activtiy_Court_3-Event_End"
+          ]
+        }
+      }
+    ]
+  }
+}
+
+###
+Sentences: """
+(1) Maju Bangun practice corruption. 
+(2) Budi Santoso persuaded Andi Wijaya. 
+(3) Andi Wijaya accepted bribes. 
+(4) Linda Setiawan becomes a intermediary. 
+(5) Linda Setiawan distributed the bribe money and made transfers to fake companies. 
+(6) Maju Bangun violates construction material standards. 
+(7) Dian Prasetyo knows and being silenced by internal pressure. 
+(8) Rini Susanti as a whistleblower report to Corruption Eradication Commission.
+"""
+Output:
+{
+  "bpmn:definitions": {
+    "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "@xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL",
+    "@xmlns:bpmndi": "http://www.omg.org/spec/BPMN/20100524/DI",
+    "@xmlns:dc": "http://www.omg.org/spec/DD/20100524/DC",
+    "@xmlns:di": "http://www.omg.org/spec/DD/20100524/DI",
+    "@id": "Definitions_1xh4b31",
+    "@targetNamespace": "http://bpmn.io/schema/bpmn",
+    "@exporter": "bpmn-js (https://demo.bpmn.io)",
+    "@exporterVersion": "16.4.0",
+    "bpmn:collaboration": {
+      "@id": "Collaboration_1",
+      "bpmn:participant": [
+        {
+          "@id": "Participant_Maju_Bangun",
+          "@name": "Maju Bangun",
+          "@processRef": "Process_Maju_Bangun"
+        },
+        {
+          "@id": "Participant_Budi_Santoso",
+          "@name": "Budi Santoso",
+          "@processRef": "Process_Budi_Santoso"
+        },
+        {
+          "@id": "Participant_Linda_Setiawan",
+          "@name": "Linda Setiawan",
+          "@processRef": "Process_Linda_Setiawan"
+        },
+        {
+          "@id": "Participant_Andi_Wijaya",
+          "@name": "Andi Wijaya",
+          "@processRef": "Process_Andi_Wijaya"
+        },
+        {
+          "@id": "Participant_Dian_Prasetyo",
+          "@name": "Dian Prasetyo",
+          "@processRef": "Process_Dian_Prasetyo"
+        },
+        {
+          "@id": "Participant_Rini_Susanti",
+          "@name": "Rini Susanti",
+          "@processRef": "Process_Rini_Susanti"
+        }
+      ],
+      "bpmn:messageFlow": [
+        {
+          "@id": "Flow_Activity_Maju_Bangun_1-Activity_Budi_Santoso_1",
+          "@sourceRef": "Activity_Maju_Bangun_1",
+          "@targetRef": "Activity_Budi_Santoso_1"
+        },
+        {
+          "@id": "Flow_Activity_Linda_Setiawan_2-Activity_Maju_Bangun_2",
+          "@sourceRef": "Activity_Linda_Setiawan_2",
+          "@targetRef": "Activity_Maju_Bangun_2"
+        },
+        {
+          "@id": "Flow_Activity_Andi_Wijaya_1-Activity_Linda_Setiawan_1",
+          "@sourceRef": "Activity_Andi_Wijaya_1",
+          "@targetRef": "Activity_Linda_Setiawan_1"
+        },
+        {
+          "@id": "Flow_Activity_Budi_Santoso_1-Activity_Andi_Wijaya_1",
+          "@sourceRef": "Activity_Budi_Santoso_1",
+          "@targetRef": "Activity_Andi_Wijaya_1"
+        },
+        {
+          "@id": "Flow_Activity_Maju_Bangun_2-Activity_Dian_Prasetyo_1",
+          "@sourceRef": "Activity_Maju_Bangun_2",
+          "@targetRef": "Activity_Dian_Prasetyo_1"
+        },
+        {
+          "@id": "Flow_Event_As_a_Whistleblower-Activity_Dian_Prasetyo_1",
+          "@sourceRef": "Event_As_a_Whistleblower",
+          "@targetRef": "Activity_Dian_Prasetyo_1"
+        }
+      ]
+    },
+    "bpmn:process": [
+      {
+        "@id": "Process_Maju_Bangun",
+        "@isExecutable": "false",
+        "bpmn:task": [
+          {
+            "@id": "Activity_Maju_Bangun_1",
+            "@name": "Corrupt Practices",
+            "bpmn:incoming": "Flow_Event_Start-Activity_Maju_Bangun_1"
+          },
+          {
+            "@id": "Activity_Maju_Bangun_2",
+            "@name": "Violating Construction Material Standards"
+          }
+        ],
+        "bpmn:startEvent": {
+          "@id": "Event_Start",
+          "@name": "Start",
+          "bpmn:outgoing": "Flow_Event_Start-Activity_Maju_Bangun_1"
+        },
+        "bpmn:sequenceFlow": {
+          "@id": "Flow_Event_Start-Activity_Maju_Bangun_1",
+          "@sourceRef": "Event_Start",
+          "@targetRef": "Activity_Maju_Bangun_1"
+        }
+      },
+      {
+        "@id": "Process_Budi_Santoso",
+        "@isExecutable": "false",
+        "bpmn:task": {
+          "@id": "Activity_Budi_Santoso_1",
+          "@name": "Persuading Andi Wijaya"
+        }
+      },
+      {
+        "@id": "Process_Linda_Setiawan",
+        "@isExecutable": "false",
+        "bpmn:task": [
+          {
+            "@id": "Activity_Linda_Setiawan_1",
+            "@name": "Become an Intermediary",
+            "bpmn:outgoing": "Flow_Activity_Linda_Setiawan_1-Activity_Linda_Setiawan_2"
+          },
+          {
+            "@id": "Activity_Linda_Setiawan_2",
+            "@name": "Distribution of Bribes and Transfers to Fake Companies",
+            "bpmn:incoming": "Flow_Activity_Linda_Setiawan_1-Activity_Linda_Setiawan_2"
+          }
+        ],
+        "bpmn:sequenceFlow": {
+          "@id": "Flow_Activity_Linda_Setiawan_1-Activity_Linda_Setiawan_2",
+          "@sourceRef": "Activity_Linda_Setiawan_1",
+          "@targetRef": "Activity_Linda_Setiawan_2"
+        }
+      },
+      {
+        "@id": "Process_Andi_Wijaya",
+        "@isExecutable": "false",
+        "bpmn:task": {
+          "@id": "Activity_Andi_Wijaya_1",
+          "@name": "Accepting Bribes"
+        }
+      },
+      {
+        "@id": "Process_Dian_Prasetyo",
+        "@isExecutable": "false",
+        "bpmn:task": {
+          "@id": "Activity_Dian_Prasetyo_1",
+          "@name": "Knowing and Being Silenced by Internal Pressure"
+        }
+      },
+      {
+        "@id": "Process_Rini_Susanti",
+        "@isExecutable": "false",
+        "bpmn:intermediateThrowEvent": {
+          "@id": "Event_As_a_Whistleblower",
+          "@name": "As a Whistleblower",
+          "bpmn:outgoing": "Flow_Event_As_a_Whistleblower-Activity_Rini_Susanti_1"
+        },
+        "bpmn:task": {
+          "@id": "Activity_Rini_Susanti_1",
+          "@name": "Report to the Corruption Eradication Commission",
+          "bpmn:incoming": "Flow_Event_As_a_Whistleblower-Activity_Rini_Susanti_1",
+          "bpmn:outgoing": "Flow_Activity_Rini_Susanti_1-Event_End"
+        },
+        "bpmn:endEvent": {
+          "@id": "Event_End",
+          "@name": "End",
+          "bpmn:incoming": "Flow_Activity_Rini_Susanti_1-Event_End"
+        },
+        "bpmn:sequenceFlow": [
+          {
+            "@id": "Flow_Event_As_a_Whistleblower-Activity_Rini_Susanti_1",
+            "@sourceRef": "Event_As_a_Whistleblower",
+            "@targetRef": "Activity_Rini_Susanti_1"
+          },
+          {
+            "@id": "Flow_Activity_Rini_Susanti_1-Event_End",
+            "@sourceRef": "Activity_Rini_Susanti_1",
+            "@targetRef": "Event_End"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+###

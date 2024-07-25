@@ -1,0 +1,275 @@
+Create a BPMN JSON for all of the following actors and sentences using the following JSON syntax and rules!
+You need to give me the answer in Bahasa Indonesia!
+Syntax:
+{
+  nodes: [
+    {
+      "node_id": int,
+      "node_participant": string,
+      "node_type": enum("startEvent", "task", "intermediateThrowEvent", "exclusiveGateway", "endEvent"),
+      "node_name": string,
+      "node_parent_id": int
+    }
+  ]
+}
+Rules:
+1. Include actors to node_participant in nodes with regex ^[a-zA-Z_]+$.
+2. Create nodes that have all nodes with node_parent_id which is a list.
+3. Create nodes that have 1 node with node_type = startEvent and node_parent_id = [0].
+4. Create nodes that have all nodes with node_parent_id <> [0] except nodes with node_type = startEvent.
+5. Create nodes that have all nodes with node_type = exclusiveGateway for each conditional sentence.
+6. Create nodes that have all nodes with node_type = intermediateThrowEvent for each thrown event.
+7. Capture the following passage into a process-based BPMN. Every task should be a node which is executed by an actor as participant.
+
+###
+Actors: """
+Saksi, Hakim Ketua Sidang, Panitera, Penuntut Umum.
+"""
+Sentences: """
+(1) Apabila keterangan saksi di sidang disangka palsu, hakim ketua sidang memperingatkan 
+dengan sungguh-sungguh kepadanya supaya memberikan keterangan yang sebenarnya dan 
+mengemukakan ancaman pidana yang dapat di kenakan kepadanya apabila ia tetap 
+memberikan keterangan palsu.  
+(2) Apabila saksi tetap pada keterangannya itu, hakim ketua sidang karena jabatannya atau 
+atas permintaan penuntut umum atau terdakwa dapat memberi perintah supaya saksi itu 
+ditahan untuk selanjutnya dituntut perkara dengan dakwaan sumpah palsu.  
+(3) Dalam hal yang demikian oleh panitera segera dibuat berita acara pemeriksaan sidang 
+yang memuat keterangan saksi dengan menyebutkan alasan persangkaan, bahwa keterangan saksi itu adalah palsu dan berita acara tersebut ditandatangani oleh hakim ketua sidang serta 
+panitera dan segera diserahkan kepada penuntut umum untuk diselesaikan menurut ketentuan 
+undang-undang ini.  
+(4) Jika perlu hakim ketua sidang menangguhkan sidang dalam perkara semula sampai pemeriksaan perkara pidana terhadap saksi itu selesai. 
+"""
+Output:
+{
+  "nodes": [
+    {
+      "node_id": 1,
+      "node_participant": "Saksi",
+      "node_type": "startEvent",
+      "node_name": "Start",
+      "node_parent_id": [0]
+    },
+    {
+      "node_id": 2,
+      "node_participant": "Saksi",
+      "node_type": "exclusiveGateway",
+      "node_name": "Memberikan keterangan palsu?",
+      "node_parent_id": [1]
+    },
+    {
+      "node_id": 3,
+      "node_participant": "Hakim_Ketua_Sidang",
+      "node_type": "task",
+      "node_name": "Memperingatkan saksi untuk memberikan keterangan yang sebenarnya",
+      "node_parent_id": [2]
+    },
+    {
+      "node_id": 4,
+      "node_participant": "Hakim_Ketua_Sidang",
+      "node_type": "task",
+      "node_name": "Mengemukakan ancaman pidana yang dapat di kenakan apabila saksi tetap memberikan keterangan palsu",
+      "node_parent_id": [3]
+    },
+    {
+      "node_id": 5,
+      "node_participant": "Saksi",
+      "node_type": "exclusiveGateway",
+      "node_name": "Tetap pada keterangan palsu?",
+      "node_parent_id": [4]
+    },
+    {
+      "node_id": 6,
+      "node_participant": "Hakim_Ketua_Sidang",
+      "node_type": "intermediateThrowEvent",
+      "node_name": "Memberi perintah untuk menahan saksi",
+      "node_parent_id": [5]
+    },
+    {
+      "node_id": 7,
+      "node_participant": "Panitera",
+      "node_type": "task",
+      "node_name": "Membuat berita acara pemeriksaan sidang",
+      "node_parent_id": [6]
+    },
+    {
+      "node_id": 8,
+      "node_participant": "Panitera",
+      "node_type": "task",
+      "node_name": "Menyebutkan alasan persangkaan bahwa keterangan saksi adalah palsu",
+      "node_parent_id": [7]
+    },
+    {
+      "node_id": 9,
+      "node_participant": "Panitera",
+      "node_type": "task",
+      "node_name": "Menandatangani berita acara pemeriksaan sidang",
+      "node_parent_id": [8]
+    },
+    {
+      "node_id": 10,
+      "node_participant": "Panitera",
+      "node_type": "task",
+      "node_name": "Menyerahkan berita acara pemeriksaan sidang kepada penuntut umum",
+      "node_parent_id": [9]
+    },
+    {
+      "node_id": 11,
+      "node_participant": "Hakim_Ketua_Sidang",
+      "node_type": "task",
+      "node_name": "Menangguhkan sidang dalam perkara semula",
+      "node_parent_id": [10]
+    },
+    {
+      "node_id": 12,
+      "node_participant": "Hakim_Ketua_Sidang",
+      "node_type": "task",
+      "node_name": "Menunggu pemeriksaan perkara pidana terhadap saksi selesai",
+      "node_parent_id": [11]
+    },
+    {
+      "node_id": 13,
+      "node_participant": "Hakim_Ketua_Sidang",
+      "node_type": "endEvent",
+      "node_name": "End",
+      "node_parent_id": [12]
+    },
+    {
+      "node_id": 14,
+      "node_participant": "Saksi",
+      "node_type": "endEvent",
+      "node_name": "End",
+      "node_parent_id": [2]
+    },
+    {
+      "node_id": 15,
+      "node_participant": "Saksi",
+      "node_type": "endEvent",
+      "node_name": "End",
+      "node_parent_id": [5]
+    }
+  ]
+}
+
+###
+Actors: """
+Pemohon Kasasi, Panitera, Pihak Lain.
+"""
+Sentences: """
+(1) Pemohon kasasi wajib mengajukan memori kasasi yang memuat alasan permohonan 
+kasasinya dan dalam waktu empat belas hari setelah mengajukan permohonan tersebut, harus 
+sudah menyerahkannya kepada panitera yang untuk itu ia memberikan surat tanda terima.  
+(2) Dalam hal pemohon kasasi adalah terdakwa yang kurang memahami hukum, panitera pada 
+waktu menerima permohonan kasasi wajib menanyakan apakah alasan ia mengajukan 
+permohonan tersebut dan untuk itu panitera membuatkan memori kasasinya.  
+(3) Alasan yang tersebut pada ayat (1) dan ayat (2) adalah sebagaimana dimaksud dalam Pasal 253 ayat (1) undang-undang ini.  
+(4) Apabila dalam tenggang waktu sebagaimana di maksud dalam ayat (1), pemohon terlambat 
+menyerahkan memori kasasi maka hak untuk mengajukan permohonan kasasi gugur.  
+(5) Ketentuan sebagaimana diatur dalam Pasal 246 ayat (3) berlaku juga untuk ayat (4) pasal ini.  
+(6) Tembusan memori kasasi yang diajukan oleh salah satu pihak, oleh panitera disampaikan kepada pihak lainnya dan pihak lain itu berhak mengajukan kontra memori kasasi.  
+(7) Dalam tenggang waktu sebagaimana tersebut pada ayat (1), panitera menyampaikan tembusan kontra memori kasasi kepada pihak yang semula mengajukan memori kasasi.
+"""
+Output:
+{
+  "nodes": [
+    {
+      "node_id": 1,
+      "node_participant": "Pemohon_Kasasi",
+      "node_type": "startEvent",
+      "node_name": "Start",
+      "node_parent_id": [0]
+    },
+    {
+      "node_id": 2,
+      "node_participant": "Pemohon_Kasasi",
+      "node_type": "task",
+      "node_name": "Mengajukan memori kasasi yang memuat alasan permohonan kasasin",
+      "node_parent_id": [1]
+    },
+    {
+      "node_id": 3,
+      "node_participant": "Pemohon_Kasasi",
+      "node_type": "task",
+      "node_name": "Menyerahkan memori kasasi kepada panitera dalam waktu empat belas hari",
+      "node_parent_id": [2]
+    },
+    {
+      "node_id": 4,
+      "node_participant": "Panitera",
+      "node_type": "task",
+      "node_name": "Memberikan surat tanda terima kepada pemohon kasasi",
+      "node_parent_id": [3]
+    },
+    {
+      "node_id": 5,
+      "node_participant": "Pemohon_Kasasi",
+      "node_type": "exclusiveGateway",
+      "node_name": "Adalah terdakwa yang kurang memahami hukum?",
+      "node_parent_id": [4]
+    },
+    {
+      "node_id": 6,
+      "node_participant": "Panitera",
+      "node_type": "task",
+      "node_name": "Menanyakan alasan pemohon kasasi mengajukan permohonan kasasi",
+      "node_parent_id": [5]
+    },
+    {
+      "node_id": 7,
+      "node_participant": "Panitera",
+      "node_type": "task",
+      "node_name": "Membuatkan memori kasasi bagi pemohon kasasi",
+      "node_parent_id": [6]
+    },
+    {
+      "node_id": 8,
+      "node_participant": "Pemohon_Kasasi",
+      "node_type": "exclusiveGateway",
+      "node_name": "Terlambat menyerahkan memori kasasi?",
+      "node_parent_id": [7, 5]
+    },
+    {
+      "node_id": 9,
+      "node_participant": "Pemohon_Kasasi",
+      "node_type": "task",
+      "node_name": "Hak untuk mengajukan permohonan kasasi gugur",
+      "node_parent_id": [8]
+    },
+    {
+      "node_id": 10,
+      "node_participant": "Pemohon_Kasasi",
+      "node_type": "endEvent",
+      "node_name": "End",
+      "node_parent_id": [9]
+    },
+    {
+      "node_id": 11,
+      "node_participant": "Panitera",
+      "node_type": "task",
+      "node_name": "Menyampaikan tembusan memori kasasi kepada pihak lainnya",
+      "node_parent_id": [8]
+    },
+    {
+      "node_id": 12,
+      "node_participant": "Pihak_Lain",
+      "node_type": "task",
+      "node_name": "Mengajukan kontra memori kasasi",
+      "node_parent_id": [11]
+    },
+    {
+      "node_id": 13,
+      "node_participant": "Panitera",
+      "node_type": "task",
+      "node_name": "Menyampaikan tembusan kontra memori kasasi kepada pemohon kasasi",
+      "node_parent_id": [12]
+    },
+    {
+      "node_id": 14,
+      "node_participant": "Panitera",
+      "node_type": "endEvent",
+      "node_name": "End",
+      "node_parent_id": [13]
+    }
+  ]
+}
+
+###

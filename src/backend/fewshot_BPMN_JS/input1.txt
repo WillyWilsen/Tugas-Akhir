@@ -1,5 +1,3 @@
-Create a BPMN in the following JSON format!
-
 Rules:
 1. bpmn:participant has each @processRef as a swimlane
 2. bpmn:messageFlow must connect one swimlane to another swimlane by task or event as @sourceRef and @targetRef (every task or event in the different swimlane must be connected by bpmn:messageFlow)
@@ -79,5 +77,13 @@ Syntax:
   }
 }
 
-Text:
-InnovateTech discovered information theft. CEO Alex Miller recruits Laura Davis and Michael Turner. CEO Alex Miller founded TechInnovate. TechInnovate mimicked InnovateTech's product and strategy. InnovateTech felt aggrieved and filed a lawsuit. InnovateTech Legal Team involved and court processed law. If TechInnovate is found guilty, court convicts TechInnovate of intellectual property theft.
+Create a BPMN for all of the following sentences using the JSON rules and syntax above!
+
+Sentences:
+(1) InnovateTech discovered information theft. 
+(2) CEO Alex Miller recruits Laura Davis and Michael Turner. 
+(3) CEO Alex Miller founded TechInnovate. 
+(4) TechInnovate mimicked InnovateTech's product and strategy. 
+(5) InnovateTech felt aggrieved and filed a lawsuit. 
+(6) InnovateTech Legal Team involved and court processed law. 
+(7) If TechInnovate is found guilty, court convicts TechInnovate of intellectual property theft.
