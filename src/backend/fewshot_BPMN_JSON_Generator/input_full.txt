@@ -17,7 +17,7 @@ Rules:
 2. Create nodes that have all nodes with node_parent_id which is a list.
 3. Create nodes that have 1 node with node_type = startEvent and node_parent_id = [0].
 4. Create nodes that have all nodes with node_parent_id <> [0] except nodes with node_type = startEvent.
-5. Create nodes that have all nodes with node_type = exclusiveGateway for each conditional sentence.
+5. Create nodes that have all nodes with node_type = exclusiveGateway and have 2 child nodes (if then else) for each conditional sentence.
 6. Create nodes that have all nodes with node_type = intermediateThrowEvent for each thrown event.
 7. Capture the following passage into a process-based BPMN. Every task should be a node which is executed by an actor as participant.
 
