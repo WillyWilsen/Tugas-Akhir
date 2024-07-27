@@ -9,11 +9,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
-fewshot_summarization_input1 = 'fewshot_summarization/input1.txt'
-fewshot_summarization_output1 = 'fewshot_summarization/output1.txt'
-fewshot_summarization_input2 = 'fewshot_summarization/input2.txt'
-fewshot_summarization_output2 = 'fewshot_summarization/output2.txt'
-fewshot_summarization_input_full = 'fewshot_summarization/input_full.txt'
 
 # Extract text from PDF
 def extract_text_from_pdf(file):
