@@ -2,10 +2,7 @@ import openai
 import os
 import re
 from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import FAISS
-from langchain.chains import RetrievalQA
-from langchain.llms import OpenAI
 from PyPDF2 import PdfReader
 from dotenv import load_dotenv
 
@@ -30,10 +27,6 @@ def extract_text_from_pdf(file):
 def get_relevant_texts_rag_gpt(file, query):
   # Extract file to text
   raw_text = extract_text_from_pdf(file)
-
-  # Few-shot Summarization Learning
-  with open(fewshot_summarization_input_full, 'r') as _file:
-    fewshot_summarization_input_full_text = _file.read()
 
   # Split the text into chunks
   pattern = r"\nPasal \d+\b"
