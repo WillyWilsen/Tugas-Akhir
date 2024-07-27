@@ -29,7 +29,6 @@ def summarize_document_rag_llm(file, query):
   text_splitter = CharacterTextSplitter(        
     separator = "\n",
     chunk_size = 2000,
-    chunk_overlap  = 150,
     length_function = len,
   )
   texts = text_splitter.split_text(raw_text)
