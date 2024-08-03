@@ -7,3 +7,4 @@ python-dotenv
 langchain==0.0.336
 tiktoken
 faiss-cpu
+google-generativeai

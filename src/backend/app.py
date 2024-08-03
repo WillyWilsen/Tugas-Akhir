@@ -7,9 +7,9 @@ from services.bpmn_js import generate_bpmn_js
 from services.bpmn_sketch_miner import generate_bpmn_sketch_miner
 from services.bpmn_layout import generate_layout
 from services.llm_summarization import summarize_document_llm
-from services.rag_llm_summarization import summarize_document_rag_llm
 from services.rag_gpt import get_relevant_texts_rag_gpt
 from services.bpmn_json_generator import generate_bpmn_json
+from services.bpmn_json_generator_gemini import generate_bpmn_json_gemini
 from services.bpmn_json_merger import merge_bpmn_json
 
 app = Flask(__name__)
@@ -21,17 +21,20 @@ def handle_bpmn_js():
   file = request.files['file']
   summarizationType = request.form['summarizationType']
   query = request.form['query']
+  LLMType = request.form['LLMType']
   file_name = f'output/{current_time}_{file.filename}'
 
   if summarizationType == 'RAG-LLM':
     summary = get_relevant_texts_rag_gpt(file, query)
-    # summary = summarize_document_rag_llm(file, query)
   else:
     summary = summarize_document_llm(file, query)
   with open(f'{file_name}_summary.txt', 'w') as file:
     file.write(summary)
 
-  bpmn_json = generate_bpmn_json(summary)
+  if (LLMType == 'GPT'):
+    bpmn_json = generate_bpmn_json(summary)
+  else:
+    bpmn_json = generate_bpmn_json_gemini(summary)
   with open(f'{file_name}.json', 'w') as file:
     file.write(bpmn_json)
   bpmn = merge_bpmn_json(json.loads(bpmn_json))

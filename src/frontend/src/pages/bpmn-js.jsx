@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   FormControl,
   FormLabel,
@@ -19,9 +19,17 @@ export const BPMN_JS = () => {
   const [file, setFile] = useState(null);
   const [summarizationType, setSummarizationType] = useState('RAG-LLM');
   const [query, setQuery] = useState('');
+  const [LLMType, setLLMType] = useState('GPT');
   const [errorText, setErrorText] = useState('');
+  const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
   const bpmnContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (result) {
+      previewBPMN(result);
+    }
+  }, [result]);
 
   const generateBPMN = async () => {
     setLoading(true);
@@ -35,11 +43,14 @@ export const BPMN_JS = () => {
       formData.append('file', file);
       formData.append('summarizationType', summarizationType);
       formData.append('query', query);
+      formData.append('LLMType', LLMType);
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/bpmn-js`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+
+      setResult(`${import.meta.env.VITE_API_URL}/${response.data}`);
       await previewBPMN(`${import.meta.env.VITE_API_URL}/${response.data}`);
     } catch (error) {
       setErrorText(error.message);
@@ -95,6 +106,13 @@ export const BPMN_JS = () => {
         <FormControl mt="2">
           <FormLabel>Query</FormLabel>
           <Textarea rows={3} borderWidth="1px" borderColor="black" size="sm" placeholder='Detailed information to be provided' onChange={e => setQuery(e.target.value)} width="50%" />
+        </FormControl>
+        <FormControl mt="2">
+          <FormLabel>LLM Type</FormLabel>
+          <Select borderWidth="1px" borderColor="black" placeholder='LLM Type' defaultValue={LLMType} onChange={e => setLLMType(e.target.value)} width="50%" >
+            <option value={"GPT"}>GPT</option>
+            <option value={"Gemini"}>Gemini</option>
+          </Select>
         </FormControl>
         <FormControl mt="2">
           <Button colorScheme="green" size="md" mx="1" isLoading={loading} onClick={generateBPMN}>Generate</Button>
