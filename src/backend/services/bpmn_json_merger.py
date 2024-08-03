@@ -25,9 +25,9 @@ def merge_bpmn_json(data):
   while len(node_queue) > 0:
     node = node_queue.pop(0)
     if node['node_id'] in processed_nodes:
-      break
+      continue
     processed_nodes.append(node['node_id'])
-    node_queue = [child for child in data['nodes'] if node['node_id'] in child['node_parent_id']] + node_queue
+    node_queue = [child for child in data['nodes'] if node['node_id'] in child['node_parent_id'] and child['node_id'] not in processed_nodes and child not in node_queue] + node_queue
 
     participant_id = [participant["@id"] for participant in bpmn["bpmn:definitions"]["bpmn:collaboration"]["bpmn:participant"]]
     if f"Participant_{node['node_participant']}" not in participant_id:

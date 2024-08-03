@@ -99,9 +99,9 @@ def generate_layout(bpmn, data):
   while len(node_queue) > 0:
     node = node_queue.pop(0)
     if node['node_id'] in processed_nodes:
-      break
+      continue
     processed_nodes.append(node['node_id'])
-    node_queue = [child for child in data['nodes'] if node['node_id'] in child['node_parent_id']] + node_queue
+    node_queue = [child for child in data['nodes'] if node['node_id'] in child['node_parent_id'] and child['node_id'] not in processed_nodes and child not in node_queue] + node_queue
 
     # Node Layout
     if node['node_type'] == 'startEvent':
