@@ -212,23 +212,59 @@ def generate_layout(bpmn, data):
           target_shape = target_shapes[0]
           if node_parent['node_participant'] == node['node_participant']:
             if int(source_shape['dc:Bounds']['@x']) < int(target_shape['dc:Bounds']['@x']):
-              edge['di:waypoint'].append({
-                '@x': str(int(source_shape['dc:Bounds']['@x']) + int(source_shape['dc:Bounds']['@width'])),
-                '@y': str(int(source_shape['dc:Bounds']['@y']) + int(source_shape['dc:Bounds']['@height']) // 2)
-              })
-              edge['di:waypoint'].append({
-                '@x': str(int(target_shape['dc:Bounds']['@x'])),
-                '@y': str(int(target_shape['dc:Bounds']['@y']) + int(target_shape['dc:Bounds']['@height']) // 2)
-              })
+              if int(source_shape['dc:Bounds']['@y']) < int(target_shape['dc:Bounds']['@y']):
+                edge['di:waypoint'].append({
+                  '@x': str(int(source_shape['dc:Bounds']['@x']) + int(source_shape['dc:Bounds']['@width']) // 2),
+                  '@y': str(int(source_shape['dc:Bounds']['@y']) + int(source_shape['dc:Bounds']['@height']))
+                })
+                edge['di:waypoint'].append({
+                  '@x': str(int(source_shape['dc:Bounds']['@x']) + int(source_shape['dc:Bounds']['@width']) // 2),
+                  '@y': str(int(target_shape['dc:Bounds']['@y']) + int(target_shape['dc:Bounds']['@height']) // 2)
+                })
+                edge['di:waypoint'].append({
+                  '@x': str(int(target_shape['dc:Bounds']['@x'])),
+                  '@y': str(int(target_shape['dc:Bounds']['@y']) + int(target_shape['dc:Bounds']['@height']) // 2)
+                })
+              else:
+                edge['di:waypoint'].append({
+                  '@x': str(int(source_shape['dc:Bounds']['@x']) + int(source_shape['dc:Bounds']['@width']) // 2),
+                  '@y': str(int(source_shape['dc:Bounds']['@y']))
+                })
+                edge['di:waypoint'].append({
+                  '@x': str(int(source_shape['dc:Bounds']['@x']) + int(source_shape['dc:Bounds']['@width']) // 2),
+                  '@y': str(int(target_shape['dc:Bounds']['@y']) + int(target_shape['dc:Bounds']['@height']) // 2)
+                })
+                edge['di:waypoint'].append({
+                  '@x': str(int(target_shape['dc:Bounds']['@x'])),
+                  '@y': str(int(target_shape['dc:Bounds']['@y']) + int(target_shape['dc:Bounds']['@height']) // 2)
+                })
             else:
-              edge['di:waypoint'].append({
-                '@x': str(int(source_shape['dc:Bounds']['@x'])),
-                '@y': str(int(source_shape['dc:Bounds']['@y']) + int(source_shape['dc:Bounds']['@height']) // 2)
-              })
-              edge['di:waypoint'].append({
-                '@x': str(int(target_shape['dc:Bounds']['@x']) + int(target_shape['dc:Bounds']['@width'])),
-                '@y': str(int(target_shape['dc:Bounds']['@y']) + int(target_shape['dc:Bounds']['@height']) // 2)
-              })
+              if int(source_shape['dc:Bounds']['@y']) < int(target_shape['dc:Bounds']['@y']):
+                edge['di:waypoint'].append({
+                  '@x': str(int(source_shape['dc:Bounds']['@x']) + int(source_shape['dc:Bounds']['@width']) // 2),
+                  '@y': str(int(source_shape['dc:Bounds']['@y']) + int(source_shape['dc:Bounds']['@height']))
+                })
+                edge['di:waypoint'].append({
+                  '@x': str(int(source_shape['dc:Bounds']['@x']) + int(source_shape['dc:Bounds']['@width']) // 2),
+                  '@y': str(int(target_shape['dc:Bounds']['@y']) + int(target_shape['dc:Bounds']['@height']) // 2)
+                })
+                edge['di:waypoint'].append({
+                  '@x': str(int(target_shape['dc:Bounds']['@x']) + int(target_shape['dc:Bounds']['@width'])),
+                  '@y': str(int(target_shape['dc:Bounds']['@y']) + int(target_shape['dc:Bounds']['@height']) // 2)
+                })
+              else:
+                edge['di:waypoint'].append({
+                  '@x': str(int(source_shape['dc:Bounds']['@x']) + int(source_shape['dc:Bounds']['@width']) // 2),
+                  '@y': str(int(source_shape['dc:Bounds']['@y']))
+                })
+                edge['di:waypoint'].append({
+                  '@x': str(int(source_shape['dc:Bounds']['@x']) + int(source_shape['dc:Bounds']['@width']) // 2),
+                  '@y': str(int(target_shape['dc:Bounds']['@y']) + int(target_shape['dc:Bounds']['@height']) // 2)
+                })
+                edge['di:waypoint'].append({
+                  '@x': str(int(target_shape['dc:Bounds']['@x']) + int(target_shape['dc:Bounds']['@width'])),
+                  '@y': str(int(target_shape['dc:Bounds']['@y']) + int(target_shape['dc:Bounds']['@height']) // 2)
+                })
           else:
             if int(source_shape['dc:Bounds']['@y']) < int(target_shape['dc:Bounds']['@y']):
               edge['di:waypoint'].append({
