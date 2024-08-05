@@ -57,21 +57,22 @@ def generate_layout(bpmn, data):
   # Calculate height
   participants = {}
   for node in data['nodes']:
-    if node['node_participant'] not in participants:
-      participants[node['node_participant']] = {
+    participant = node['node_participant'].replace("/", "_")
+    if participant not in participants:
+      participants[participant] = {
         'height': distance_each_element['y']
       }
 
     if node['node_type'] == 'startEvent':
-      participants[node['node_participant']]['height'] += start_event_layout['height'] + distance_each_element['y']
+      participants[participant]['height'] += start_event_layout['height'] + distance_each_element['y']
     elif node['node_type'] == 'task':
-      participants[node['node_participant']]['height'] += task_layout['height'] + distance_each_element['y']
+      participants[participant]['height'] += task_layout['height'] + distance_each_element['y']
     elif node['node_type'] == 'intermediateThrowEvent':
-      participants[node['node_participant']]['height'] += intermediate_throw_event_layout['height'] + distance_each_element['y']
+      participants[participant]['height'] += intermediate_throw_event_layout['height'] + distance_each_element['y']
     elif node['node_type'] == 'exclusiveGateway':
-      participants[node['node_participant']]['height'] += exclusive_gateway_layout['height'] + distance_each_element['y']
+      participants[participant]['height'] += exclusive_gateway_layout['height'] + distance_each_element['y']
     elif node['node_type'] == 'endEvent':
-      participants[node['node_participant']]['height'] += end_event_layout['height'] + distance_each_element['y']
+      participants[participant]['height'] += end_event_layout['height'] + distance_each_element['y']
     
   # Participants
   y = 0
@@ -104,113 +105,115 @@ def generate_layout(bpmn, data):
     node_queue = [child for child in data['nodes'] if node['node_id'] in child['node_parent_id'] and child['node_id'] not in processed_nodes and child not in node_queue] + node_queue
 
     # Node Layout
+    participant = node['node_participant'].replace("/", "_")
     if node['node_type'] == 'startEvent':
       bpmn['bpmn:definitions']['bpmndi:BPMNDiagram']['bpmndi:BPMNPlane']['bpmndi:BPMNShape'].append({
-        '@id': f'{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}_di',
-        '@bpmnElement': f'{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}',
+        '@id': f'{node["node_type"]}_{participant}_{node["node_id"]}_di',
+        '@bpmnElement': f'{node["node_type"]}_{participant}_{node["node_id"]}',
         'dc:Bounds': {
           '@x': str(x),
-          '@y': str(participants[node['node_participant']]['current_y']),
+          '@y': str(participants[participant]['current_y']),
           '@width': str(start_event_layout['width']),
           '@height': str(start_event_layout['height'])
         },
         'bpmndi:BPMNLabel': {
           'dc:Bounds': {
             '@x': str(x),
-            '@y': str(participants[node['node_participant']]['current_y'] + start_event_layout['height'] + distance_event_label_to_layout),
+            '@y': str(participants[participant]['current_y'] + start_event_layout['height'] + distance_event_label_to_layout),
             '@width': str(event_label_layout['width']),
             '@height': str(event_label_layout['height'])
           }
         }
       })
       x += start_event_layout['width'] + distance_each_element['x']
-      participants[node['node_participant']]['current_y'] += start_event_layout['height'] + distance_each_element['y']
+      participants[participant]['current_y'] += start_event_layout['height'] + distance_each_element['y']
     elif node['node_type'] == 'task':
       bpmn['bpmn:definitions']['bpmndi:BPMNDiagram']['bpmndi:BPMNPlane']['bpmndi:BPMNShape'].append({
-        '@id': f'{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}_di',
-        '@bpmnElement': f'{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}',
+        '@id': f'{node["node_type"]}_{participant}_{node["node_id"]}_di',
+        '@bpmnElement': f'{node["node_type"]}_{participant}_{node["node_id"]}',
         'dc:Bounds': {
           '@x': str(x),
-          '@y': str(participants[node['node_participant']]['current_y']),
+          '@y': str(participants[participant]['current_y']),
           '@width': str(task_layout['width']),
           '@height': str(task_layout['height'])
         },
         'bpmndi:BPMNLabel': None
       })
       x += task_layout['width'] + distance_each_element['x']
-      participants[node['node_participant']]['current_y'] += task_layout['height'] + distance_each_element['y']
+      participants[participant]['current_y'] += task_layout['height'] + distance_each_element['y']
     elif node['node_type'] == 'intermediateThrowEvent':
       bpmn['bpmn:definitions']['bpmndi:BPMNDiagram']['bpmndi:BPMNPlane']['bpmndi:BPMNShape'].append({
-        '@id': f'{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}_di',
-        '@bpmnElement': f'{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}',
+        '@id': f'{node["node_type"]}_{participant}_{node["node_id"]}_di',
+        '@bpmnElement': f'{node["node_type"]}_{participant}_{node["node_id"]}',
         'dc:Bounds': {
           '@x': str(x),
-          '@y': str(participants[node['node_participant']]['current_y']),
+          '@y': str(participants[participant]['current_y']),
           '@width': str(intermediate_throw_event_layout['width']),
           '@height': str(intermediate_throw_event_layout['height'])
         },
         'bpmndi:BPMNLabel': {
           'dc:Bounds': {
             '@x': str(x),
-            '@y': str(participants[node['node_participant']]['current_y'] + intermediate_throw_event_layout['height'] + distance_event_label_to_layout),
+            '@y': str(participants[participant]['current_y'] + intermediate_throw_event_layout['height'] + distance_event_label_to_layout),
             '@width': str(event_label_layout['width']),
             '@height': str(event_label_layout['height'])
           }
         }
       })
       x += intermediate_throw_event_layout['width'] + distance_each_element['x']
-      participants[node['node_participant']]['current_y'] += intermediate_throw_event_layout['height'] + distance_each_element['y']
+      participants[participant]['current_y'] += intermediate_throw_event_layout['height'] + distance_each_element['y']
     elif node['node_type'] == 'exclusiveGateway':
       bpmn['bpmn:definitions']['bpmndi:BPMNDiagram']['bpmndi:BPMNPlane']['bpmndi:BPMNShape'].append({
-        '@id': f'{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}_di',
-        '@bpmnElement': f'{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}',
+        '@id': f'{node["node_type"]}_{participant}_{node["node_id"]}_di',
+        '@bpmnElement': f'{node["node_type"]}_{participant}_{node["node_id"]}',
         '@isMarkerVisible': 'true',
         'dc:Bounds': {
           '@x': str(x),
-          '@y': str(participants[node['node_participant']]['current_y']),
+          '@y': str(participants[participant]['current_y']),
           '@width': str(exclusive_gateway_layout['width']),
           '@height': str(exclusive_gateway_layout['height'])
         }
       })
       x += exclusive_gateway_layout['width'] + distance_each_element['x']
-      participants[node['node_participant']]['current_y'] += exclusive_gateway_layout['height'] + distance_each_element['y']
+      participants[participant]['current_y'] += exclusive_gateway_layout['height'] + distance_each_element['y']
     elif node['node_type'] == 'endEvent':
       bpmn['bpmn:definitions']['bpmndi:BPMNDiagram']['bpmndi:BPMNPlane']['bpmndi:BPMNShape'].append({
-        '@id': f'{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}_di',
-        '@bpmnElement': f'{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}',
+        '@id': f'{node["node_type"]}_{participant}_{node["node_id"]}_di',
+        '@bpmnElement': f'{node["node_type"]}_{participant}_{node["node_id"]}',
         'dc:Bounds': {
           '@x': str(x),
-          '@y': str(participants[node['node_participant']]['current_y']),
+          '@y': str(participants[participant]['current_y']),
           '@width': str(end_event_layout['width']),
           '@height': str(end_event_layout['height'])
         },
         'bpmndi:BPMNLabel': {
           'dc:Bounds': {
             '@x': str(x),
-            '@y': str(participants[node['node_participant']]['current_y'] + end_event_layout['height'] + distance_event_label_to_layout),
+            '@y': str(participants[participant]['current_y'] + end_event_layout['height'] + distance_event_label_to_layout),
             '@width': str(event_label_layout['width']),
             '@height': str(event_label_layout['height'])
           }
         }
       })
       x += end_event_layout['width'] + distance_each_element['x']
-      participants[node['node_participant']]['current_y'] += end_event_layout['height'] + distance_each_element['y']
+      participants[participant]['current_y'] += end_event_layout['height'] + distance_each_element['y']
 
     # Edge Layout
     if node['node_parent_id'] != [0]:
       node_parents = [node_parent for node_parent in data['nodes'] if node_parent['node_id'] in node['node_parent_id']]
       for node_parent in node_parents:
+        node_parent_participant = node_parent['node_participant'].replace("/", "_")
         edge = {
-          '@id': f'Flow_{node_parent["node_type"]}_{node_parent["node_participant"]}_{node_parent["node_id"]}_{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}_di',
-          '@bpmnElement': f'Flow_{node_parent["node_type"]}_{node_parent["node_participant"]}_{node_parent["node_id"]}_{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}',
+          '@id': f'Flow_{node_parent["node_type"]}_{node_parent_participant}_{node_parent["node_id"]}_{node["node_type"]}_{participant}_{node["node_id"]}_di',
+          '@bpmnElement': f'Flow_{node_parent["node_type"]}_{node_parent_participant}_{node_parent["node_id"]}_{node["node_type"]}_{participant}_{node["node_id"]}',
           'di:waypoint': []
         }
-        source_shapes = [shape for shape in bpmn['bpmn:definitions']['bpmndi:BPMNDiagram']['bpmndi:BPMNPlane']['bpmndi:BPMNShape'] if shape['@bpmnElement'] == f'{node_parent["node_type"]}_{node_parent["node_participant"]}_{node_parent["node_id"]}']
-        target_shapes = [shape for shape in bpmn['bpmn:definitions']['bpmndi:BPMNDiagram']['bpmndi:BPMNPlane']['bpmndi:BPMNShape'] if shape['@bpmnElement'] == f'{node["node_type"]}_{node["node_participant"]}_{node["node_id"]}']
+        source_shapes = [shape for shape in bpmn['bpmn:definitions']['bpmndi:BPMNDiagram']['bpmndi:BPMNPlane']['bpmndi:BPMNShape'] if shape['@bpmnElement'] == f'{node_parent["node_type"]}_{node_parent_participant}_{node_parent["node_id"]}']
+        target_shapes = [shape for shape in bpmn['bpmn:definitions']['bpmndi:BPMNDiagram']['bpmndi:BPMNPlane']['bpmndi:BPMNShape'] if shape['@bpmnElement'] == f'{node["node_type"]}_{participant}_{node["node_id"]}']
         if len(source_shapes) > 0 and len(target_shapes) > 0:
           source_shape = source_shapes[0]
           target_shape = target_shapes[0]
-          if node_parent['node_participant'] == node['node_participant']:
+          if node_parent_participant == participant:
             if int(source_shape['dc:Bounds']['@x']) < int(target_shape['dc:Bounds']['@x']):
               if int(source_shape['dc:Bounds']['@y']) < int(target_shape['dc:Bounds']['@y']):
                 edge['di:waypoint'].append({
